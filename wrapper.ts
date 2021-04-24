@@ -76,8 +76,8 @@ export interface PageInfo {
   number: number;
 }
 
-export async function fetchChapter(name: string, number: number) {
-  const data = await request("/chapter", { name, number }).then(
+export async function fetchChapter(manga: string, number: number) {
+  const data = await request("/chapter", { manga, number }).then(
     (e) => e.pages as PageInfo[]
   );
   return data;
