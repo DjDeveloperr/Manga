@@ -44,7 +44,19 @@ serve({
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0",
         },
         body: `searchword=${encodeURIComponent(name)}`,
-      }).then((e) => e.json())
+      })
+        .then((e) => e.json())
+        .then((e) =>
+          e.map((e: any) => {
+            e.nameUnsigned = e.nameunsigned;
+            delete e.nameunsigned;
+            e.storyLink = e.story_link;
+            delete e.story_link;
+            e.lastChapter = e.lastchapter;
+            delete e.lastchapter;
+            return e;
+          })
+        )
     );
   },
   "/api/manga": async (req) => {
