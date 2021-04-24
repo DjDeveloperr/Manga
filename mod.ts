@@ -51,6 +51,9 @@ serve({
             e.name = e.name
               .replace(/\<span( class="[a-zA-Z0-9_\- ]+")?\>/g, "")
               .replace(/\<\/span\>/g, "");
+            e.author = e.author
+              .replace(/\<span( class="[a-zA-Z0-9_\- ]+")?\>/g, "")
+              .replace(/\<\/span\>/g, "");
             e.nameUnsigned = e.nameunsigned;
             delete e.nameunsigned;
             e.storyLink = e.story_link;
