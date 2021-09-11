@@ -1,5 +1,8 @@
-import { serve, json } from "./deps.ts";
+import { json, serve } from "./deps.ts";
 import { cheerio } from "https://deno.land/x/cheerio@1.0.2/mod.ts";
+
+const USER_AGENT =
+  "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0";
 
 serve({
   "/": () =>
@@ -29,19 +32,46 @@ serve({
         },
       ],
     }),
+  "/api/popular": async (_) => {
+    const html = await fetch("https://manganato.com", {
+      headers: {
+        "User-Agent": USER_AGENT,
+      },
+    }).then((e) => e.text());
+    const $ = cheerio.load(html);
+    const popular: any[] = [];
+    $(".owl-item").each((i, e) => {
+      if (e.type !== "tag") return;
+      e = e.children[0];
+      if (e.type !== "tag") return;
+      const img = e.children[0];
+      const urlCont = e.children[1];
+      if (urlCont.type !== "tag" || img.type !== "tag") return;
+      const urlCont2 = urlCont.children[0];
+      const urlCont3 = urlCont.children[1];
+      if (urlCont2.type !== "tag" || urlCont3.type !== "tag") return;
+      popular.push({
+        name: img.attribs.alt,
+        thumbnail: img.attribs.src,
+        url: urlCont2.attribs.href,
+        chapter: parseInt(urlCont3.attribs.title.replaceAll(/\D/g, "").trim()),
+      });
+    });
+    return json(popular as any);
+  },
   "/api/search": async (req) => {
     const q = new URL(req.url).searchParams;
     const name = q.get("q");
-    if (!name)
+    if (!name) {
       return json({ error: "Name not present in query" }, { status: 400 });
+    }
 
     return json(
-      await fetch("https://mangakakalot.com/home_json_search", {
+      await fetch("https://manganato.com/home_json_search", {
         method: "POST",
         headers: {
           "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
-          "user-agent":
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0",
+          "user-agent": USER_AGENT,
         },
         body: `searchword=${encodeURIComponent(name)}`,
       })
@@ -62,16 +92,17 @@ serve({
             delete e.lastchapter;
             return e;
           })
-        )
+        ),
     );
   },
   "/api/manga": async (req) => {
     const q = new URL(req.url).searchParams;
     const name = q.get("name");
-    if (!name)
+    if (!name) {
       return json({ error: "Name not present in query" }, { status: 400 });
+    }
 
-    const res = await fetch("https://manganelo.com/manga/" + name);
+    const res = await fetch("https://manganato.com/manga/" + name);
     if (!res.ok) return json({ error: "Manga not found" }, { status: 404 });
     const html = await res.text();
     const $ = cheerio.load(html);
@@ -83,34 +114,33 @@ serve({
       .slice("Description :\n".length);
     manga.thumbnail = $(".info-image > img:nth-child(1)").attr("src");
     manga.authors = $(
-      ".variations-tableInfo > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(2)"
+      ".variations-tableInfo > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(2)",
     )
       .text()
       .trim();
     manga.status = $(
-      ".variations-tableInfo > tbody:nth-child(1) > tr:nth-child(3) > td:nth-child(2)"
+      ".variations-tableInfo > tbody:nth-child(1) > tr:nth-child(3) > td:nth-child(2)",
     )
       .text()
       .trim();
     manga.genres = $(
-      ".variations-tableInfo > tbody:nth-child(1) > tr:nth-child(4) > td:nth-child(2)"
+      ".variations-tableInfo > tbody:nth-child(1) > tr:nth-child(4) > td:nth-child(2)",
     )
       .text()
       .trim()
       .split("-")
       .map((e) => e.trim());
     manga.updated = $(
-      ".story-info-right-extent > p:nth-child(1) > span:nth-child(2)"
+      ".story-info-right-extent > p:nth-child(1) > span:nth-child(2)",
     )
       .text()
       .trim();
-    manga.views =
-      parseInt(
-        $(".story-info-right-extent > p:nth-child(2) > span:nth-child(2)")
-          .text()
-          .trim()
-          .replaceAll(/\D/g, "")
-      ) ?? 0;
+    manga.views = parseInt(
+      $(".story-info-right-extent > p:nth-child(2) > span:nth-child(2)")
+        .text()
+        .trim()
+        .replaceAll(/\D/g, ""),
+    ) ?? 0;
     manga.rating = $("#rate_row_cmd > em:nth-child(1)")
       .text()
       .replaceAll("\n", "")
@@ -130,15 +160,15 @@ serve({
           if (c.title.includes("Vol")) {
             let match = c.title.match(/Vol(\.)?\d+/);
             if (match) {
-              c.volume =
-                parseInt(match[0].replaceAll(/\D/g, "").trim()) ?? undefined;
+              c.volume = parseInt(match[0].replaceAll(/\D/g, "").trim()) ??
+                undefined;
             }
           }
           if (c.title.includes("Chapter")) {
             let match = c.title.match(/Chapter \d+/);
             if (match) {
-              c.chapter =
-                parseInt(match[0].replaceAll(/\D/g, "").trim()) ?? undefined;
+              c.chapter = parseInt(match[0].replaceAll(/\D/g, "").trim()) ??
+                undefined;
             }
           }
           if (c.title.includes(":")) {
@@ -158,11 +188,12 @@ serve({
     const q = new URL(req.url).searchParams;
     const name = q.get("number");
     const manga = q.get("manga");
-    if (!name)
+    if (!name) {
       return json({ error: "Name not present in query" }, { status: 400 });
+    }
 
     const res = await fetch(
-      "https://manganelo.com/chapter/" + manga + "/chapter_" + name
+      "https://manganato.com/chapter/" + manga + "/chapter_" + name,
     );
     if (!res.ok) return json({ error: "Manga not found" }, { status: 404 });
     const html = await res.text();
@@ -174,10 +205,10 @@ serve({
         chapter.pages.push({
           number: (e.attribs.title ?? "").match(/page \d+/)
             ? parseInt(
-                (e.attribs.title ?? "")
-                  .match(/page \d+/)![0]
-                  .replaceAll(/\D/g, "")
-              )
+              (e.attribs.title ?? "")
+                .match(/page \d+/)![0]
+                .replaceAll(/\D/g, ""),
+            )
             : 0,
           title: (e.attribs.title ?? "")
             .replaceAll(" - MangaNelo.com", "")

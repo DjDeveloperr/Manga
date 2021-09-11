@@ -1,2 +1,2 @@
-.vscode
-test.ts
+.vscode/
+/dev.bat
