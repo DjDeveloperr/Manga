@@ -42,16 +42,19 @@ serve({
     const popular: any[] = [];
     const sel = $(".owl-carousel > .item");
     sel.each((i, e) => {
-      popular.push(e);
-      if (e.type !== "tag") return;
+      if (e.type !== "tag") return popular.push("err: e not tag");
       const img = e.children[0];
       const urlCont = e.children[1];
-      if (urlCont.type !== "tag" || img.type !== "tag") return;
+      if (urlCont.type !== "tag" || img.type !== "tag") {
+        return popular.push("err: urlCont or img not tag");
+      }
       const urlCont2 = urlCont.children[0];
       const urlCont3 = urlCont.children[1];
-      if (urlCont2.type !== "tag" || urlCont3.type !== "tag") return;
+      if (urlCont2.type !== "tag" || urlCont3.type !== "tag") {
+        return popular.push("err: urlCont2 or 3 not tag");
+      }
       const link = urlCont2.children[0];
-      if (link.type !== "tag") return;
+      if (link.type !== "tag") return popular.push("err: link not tag");
       popular.push({
         name: img.attribs.alt,
         thumbnail: img.attribs.src,
