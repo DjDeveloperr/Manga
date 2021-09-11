@@ -46,7 +46,9 @@ serve({
       const img = e.children[0];
       const urlCont = e.children[1];
       if (urlCont.type !== "tag" || img.type !== "tag") {
-        return popular.push("err: urlCont or img not tag");
+        return popular.push(
+          "err: urlCont or img not tag " + urlCont.type + ", " + img.type,
+        );
       }
       const urlCont2 = urlCont.children[0];
       const urlCont3 = urlCont.children[1];
