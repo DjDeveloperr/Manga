@@ -41,10 +41,7 @@ serve({
     const $ = cheerio.load(html);
     const popular: any[] = [];
     const sel = $(".owl-carousel > .item");
-    popular.push(html, sel.text());
     sel.each((i, e) => {
-      // if (e.type !== "tag") return;
-      // e = e.children[0];
       if (e.type !== "tag") return;
       const img = e.children[0];
       const urlCont = e.children[1];
@@ -52,10 +49,12 @@ serve({
       const urlCont2 = urlCont.children[0];
       const urlCont3 = urlCont.children[1];
       if (urlCont2.type !== "tag" || urlCont3.type !== "tag") return;
+      const link = urlCont2.children[0];
+      if (link.type !== "tag") return;
       popular.push({
         name: img.attribs.alt,
         thumbnail: img.attribs.src,
-        url: urlCont2.attribs.href,
+        url: link.attribs.href,
         chapter: parseInt(urlCont3.attribs.title.replaceAll(/\D/g, "").trim()),
       });
     });
