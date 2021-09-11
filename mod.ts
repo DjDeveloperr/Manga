@@ -9,6 +9,10 @@ serve({
     json({
       endpoints: [
         {
+          name: "Home - Popular and Recent Mangas",
+          path: "/api/home",
+        },
+        {
           name: "Search for Manga",
           path: "/api/search",
           params: {
@@ -32,40 +36,6 @@ serve({
         },
       ],
     }),
-  "/api/popular": async (_) => {
-    const html = await fetch("https://manganato.com", {
-      headers: {
-        "User-Agent": USER_AGENT,
-      },
-    }).then((e) => e.text());
-    const $ = cheerio.load(html);
-    const popular: any[] = [];
-    const sel = $(".owl-carousel > .item");
-    sel.each((_, e) => {
-      if (e.type !== "tag") return popular.push("err: e not tag");
-      const img = e.children.filter((e) => e.type === "tag")[0];
-      const urlCont = e.children.filter((e) => e.type === "tag")[1];
-      if (urlCont?.type !== "tag" || img?.type !== "tag") {
-        return;
-      }
-
-      const urlCont2 = urlCont.children.filter((e) => e.type === "tag")[0];
-      const urlCont3 = urlCont.children.filter((e) => e.type === "tag")[1];
-      if (urlCont2?.type !== "tag" || urlCont3?.type !== "tag") {
-        return;
-      }
-
-      const link = urlCont2.children.filter((e) => e.type === "tag")[0];
-      if (link?.type !== "tag") return;
-      popular.push({
-        name: img.attribs.alt,
-        thumbnail: img.attribs.src,
-        url: link.attribs.href,
-        chapter: parseInt(urlCont3.attribs.title.replaceAll(/\D/g, "").trim()),
-      });
-    });
-    return json(popular as any);
-  },
   "/api/home": async (_) => {
     const html = await fetch("https://manganato.com", {
       headers: {
@@ -148,7 +118,7 @@ serve({
     }
 
     return json(
-      await fetch("https://manganato.com/home_json_search", {
+      await fetch("https://mangakakalot.com/home_json_search", {
         method: "POST",
         headers: {
           "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
