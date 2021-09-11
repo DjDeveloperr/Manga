@@ -41,7 +41,7 @@ serve({
     const $ = cheerio.load(html);
     const popular: any[] = [];
     const sel = $(".owl-item");
-    popular.push(sel.text());
+    popular.push(html, sel.text());
     sel.each((i, e) => {
       if (e.type !== "tag") return;
       e = e.children[0];
