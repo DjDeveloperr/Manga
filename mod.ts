@@ -101,18 +101,16 @@ serve({
     const recent: any[] = [];
     sel = $(".content-homepage-item");
     sel.each((_, e) => {
-      if (e.type !== "tag") return recent.push("e no tag");
+      if (e.type !== "tag") return;
       const link = e.children.filter((e) => e.type === "tag")[0];
       const info = e.children.filter((e) => e.type === "tag")[1];
 
-      if (link?.type !== "tag" || info?.type !== "tag") {
-        return recent.push("link or info no tag");
-      }
+      if (link?.type !== "tag" || info?.type !== "tag") return;
       const img = link.children.filter((e) => e.type === "tag")[0];
-      if (img?.type !== "tag") return recent.push("img no tag");
+      if (img?.type !== "tag") return;
 
       const author = info.children.filter((e) => e.type === "tag")[1];
-      if (author?.type !== "tag") return recent.push("author no tag");
+      if (author?.type !== "tag") return;
 
       const chapters: any[] = [];
 
@@ -132,13 +130,13 @@ serve({
         });
       });
 
-      return {
+      recent.push({
         name: img.attribs.alt,
         author: author.attribs.title,
         thumbnail: img.attribs.src,
         url: link.attribs.href,
         chapters,
-      };
+      });
     });
     return json({ popular, recent });
   },
