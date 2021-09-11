@@ -100,18 +100,19 @@ serve({
     });
     const recent: any[] = [];
     sel = $(".content-homepage-item");
-    recent.push(sel.text());
     sel.each((_, e) => {
-      if (e.type !== "tag") return;
+      if (e.type !== "tag") return recent.push("e no tag");
       const link = e.children.filter((e) => e.type === "tag")[0];
       const info = e.children.filter((e) => e.type === "tag")[1];
 
-      if (link?.type !== "tag" || info?.type !== "tag") return;
+      if (link?.type !== "tag" || info?.type !== "tag") {
+        return recent.push("link or info no tag");
+      }
       const img = link.children.filter((e) => e.type === "tag")[0];
-      if (img?.type !== "tag") return;
+      if (img?.type !== "tag") return recent.push("img no tag");
 
       const author = info.children.filter((e) => e.type === "tag")[1];
-      if (author?.type !== "tag") return;
+      if (author?.type !== "tag") return recent.push("author no tag");
 
       const chapters: any[] = [];
 
