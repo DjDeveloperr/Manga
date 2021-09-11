@@ -124,9 +124,9 @@ serve({
 
         chapters.push({
           chapter: parseInt(
-            (link.data || "0").split(" ").pop()!.replaceAll(/\D/g, ""),
+            (link.attribs.title || "0").split(" ").pop()!.replaceAll(/\D/g, ""),
           ),
-          ago: ago.children[0].data,
+          ago: ago.children[0].data?.trim(),
         });
       });
 
