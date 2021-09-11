@@ -40,11 +40,11 @@ serve({
     }).then((e) => e.text());
     const $ = cheerio.load(html);
     const popular: any[] = [];
-    const sel = $(".owl-item");
+    const sel = $(".owl-carousel > .item");
     popular.push(html, sel.text());
     sel.each((i, e) => {
-      if (e.type !== "tag") return;
-      e = e.children[0];
+      // if (e.type !== "tag") return;
+      // e = e.children[0];
       if (e.type !== "tag") return;
       const img = e.children[0];
       const urlCont = e.children[1];
