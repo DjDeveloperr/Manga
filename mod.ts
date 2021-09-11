@@ -151,7 +151,9 @@ serve({
     const name = q.get("name");
     const id = q.get("id");
     if (!name && !id) {
-      return json({ error: "Name not present in query" }, { status: 400 });
+      return json({ error: "Name or ID not present in query" }, {
+        status: 400,
+      });
     }
 
     const res = await fetch(
