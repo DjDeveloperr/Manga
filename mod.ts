@@ -42,6 +42,7 @@ serve({
     const popular: any[] = [];
     const sel = $(".owl-carousel > .item");
     sel.each((i, e) => {
+      popular.push(e);
       if (e.type !== "tag") return;
       const img = e.children[0];
       const urlCont = e.children[1];
