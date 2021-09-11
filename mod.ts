@@ -41,22 +41,22 @@ serve({
     const $ = cheerio.load(html);
     const popular: any[] = [];
     const sel = $(".owl-carousel > .item");
-    sel.each((i, e) => {
+    sel.each((_, e) => {
       if (e.type !== "tag") return popular.push("err: e not tag");
       const img = e.children.filter((e) => e.type === "tag")[0];
       const urlCont = e.children.filter((e) => e.type === "tag")[1];
       if (urlCont?.type !== "tag" || img?.type !== "tag") {
-        return popular.push(
-          "err: urlCont or img not tag " + urlCont.type + ", " + img.type,
-        );
+        return;
       }
+
       const urlCont2 = urlCont.children.filter((e) => e.type === "tag")[0];
       const urlCont3 = urlCont.children.filter((e) => e.type === "tag")[1];
       if (urlCont2?.type !== "tag" || urlCont3?.type !== "tag") {
-        return popular.push("err: urlCont2 or 3 not tag");
+        return;
       }
+
       const link = urlCont2.children.filter((e) => e.type === "tag")[0];
-      if (link?.type !== "tag") return popular.push("err: link not tag");
+      if (link?.type !== "tag") return;
       popular.push({
         name: img.attribs.alt,
         thumbnail: img.attribs.src,
@@ -65,6 +65,80 @@ serve({
       });
     });
     return json(popular as any);
+  },
+  "/api/home": async (_) => {
+    const html = await fetch("https://manganato.com", {
+      headers: {
+        "User-Agent": USER_AGENT,
+      },
+    }).then((e) => e.text());
+    const $ = cheerio.load(html);
+    const popular: any[] = [];
+    let sel = $(".owl-carousel > .item");
+    sel.each((_, e) => {
+      if (e.type !== "tag") return popular.push("err: e not tag");
+      const img = e.children.filter((e) => e.type === "tag")[0];
+      const urlCont = e.children.filter((e) => e.type === "tag")[1];
+      if (urlCont?.type !== "tag" || img?.type !== "tag") {
+        return;
+      }
+
+      const urlCont2 = urlCont.children.filter((e) => e.type === "tag")[0];
+      const urlCont3 = urlCont.children.filter((e) => e.type === "tag")[1];
+      if (urlCont2?.type !== "tag" || urlCont3?.type !== "tag") {
+        return;
+      }
+
+      const link = urlCont2.children.filter((e) => e.type === "tag")[0];
+      if (link?.type !== "tag") return;
+      popular.push({
+        name: img.attribs.alt,
+        thumbnail: img.attribs.src,
+        url: link.attribs.href,
+        chapter: parseInt(urlCont3.attribs.title.replaceAll(/\D/g, "").trim()),
+      });
+    });
+    const recent: any[] = [];
+    sel = $(".content-homepage-item");
+    sel.each((_, e) => {
+      if (e.type !== "tag") return;
+      const link = e.children.filter((e) => e.type === "tag")[0];
+      const info = e.children.filter((e) => e.type === "tag")[1];
+
+      if (link?.type !== "tag" || info?.type !== "tag") return;
+      const img = link.children.filter((e) => e.type === "tag")[0];
+      if (img?.type !== "tag") return;
+
+      const author = info.children.filter((e) => e.type === "tag")[1];
+      if (author?.type !== "tag") return;
+
+      const chapters: any[] = [];
+
+      info.children.filter((e) =>
+        e.type === "tag" && e.tagName.toLowerCase() === "p"
+      ).forEach((el) => {
+        if (el.type !== "tag") return;
+        const link = el.children.filter((e) => e.type === "tag")[0];
+        const ago = el.children.filter((e) => e.type === "tag")[1];
+        if (link?.type !== "tag" || ago?.type !== "tag") return;
+
+        chapters.push({
+          chapter: parseInt(
+            (link.data || "0").split(" ").pop()!.replaceAll(/\D/g, ""),
+          ),
+          ago: ago.children[0].data,
+        });
+      });
+
+      return {
+        name: img.attribs.alt,
+        author: author.attribs.title,
+        thumbnail: img.attribs.src,
+        url: link.attribs.href,
+        chapters,
+      };
+    });
+    return json({ popular, recent });
   },
   "/api/search": async (req) => {
     const q = new URL(req.url).searchParams;
