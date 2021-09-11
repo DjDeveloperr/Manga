@@ -43,20 +43,20 @@ serve({
     const sel = $(".owl-carousel > .item");
     sel.each((i, e) => {
       if (e.type !== "tag") return popular.push("err: e not tag");
-      const img = e.children[0];
-      const urlCont = e.children[1];
-      if (urlCont.type !== "tag" || img.type !== "tag") {
+      const img = e.children.filter((e) => e.type === "tag")[0];
+      const urlCont = e.children.filter((e) => e.type === "tag")[1];
+      if (urlCont?.type !== "tag" || img?.type !== "tag") {
         return popular.push(
           "err: urlCont or img not tag " + urlCont.type + ", " + img.type,
         );
       }
-      const urlCont2 = urlCont.children[0];
-      const urlCont3 = urlCont.children[1];
-      if (urlCont2.type !== "tag" || urlCont3.type !== "tag") {
+      const urlCont2 = urlCont.children.filter((e) => e.type === "tag")[0];
+      const urlCont3 = urlCont.children.filter((e) => e.type === "tag")[1];
+      if (urlCont2?.type !== "tag" || urlCont3?.type !== "tag") {
         return popular.push("err: urlCont2 or 3 not tag");
       }
-      const link = urlCont2.children[0];
-      if (link.type !== "tag") return popular.push("err: link not tag");
+      const link = urlCont2.children.filter((e) => e.type === "tag")[0];
+      if (link?.type !== "tag") return popular.push("err: link not tag");
       popular.push({
         name: img.attribs.alt,
         thumbnail: img.attribs.src,
