@@ -149,11 +149,16 @@ serve({
   "/api/manga": async (req) => {
     const q = new URL(req.url).searchParams;
     const name = q.get("name");
-    if (!name) {
+    const id = q.get("id");
+    if (!name && !id) {
       return json({ error: "Name not present in query" }, { status: 400 });
     }
 
-    const res = await fetch("https://manganato.com/manga/" + name);
+    const res = await fetch(
+      id
+        ? ("https://manganato.com/" + id)
+        : "https://manganelo.com/manga/" + name,
+    );
     if (!res.ok) return json({ error: "Manga not found" }, { status: 404 });
     const html = await res.text();
     const $ = cheerio.load(html);
@@ -244,7 +249,7 @@ serve({
     }
 
     const res = await fetch(
-      "https://manganato.com/chapter/" + manga + "/chapter_" + name,
+      "https://manganelo.com/chapter/" + manga + "/chapter_" + name,
     );
     if (!res.ok) return json({ error: "Manga not found" }, { status: 404 });
     const html = await res.text();
