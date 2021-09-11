@@ -100,6 +100,7 @@ serve({
     });
     const recent: any[] = [];
     sel = $(".content-homepage-item");
+    recent.push(sel.text());
     sel.each((_, e) => {
       if (e.type !== "tag") return;
       const link = e.children.filter((e) => e.type === "tag")[0];
