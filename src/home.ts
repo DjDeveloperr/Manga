@@ -23,6 +23,7 @@ export async function scrapeHome(): Promise<Home> {
     const link = urlCont2.children.filter((e) => e.type === "tag")[0];
     if (link?.type !== "tag") return;
     popular.push({
+      id: link.attribs.href.split("/").pop()!,
       name: img.attribs.alt,
       thumbnail: img.attribs.src,
       url: link.attribs.href,
@@ -63,6 +64,7 @@ export async function scrapeHome(): Promise<Home> {
     });
 
     recent.push({
+      id: link.attribs.href.split("/").pop()!,
       name: img.attribs.alt,
       author: author.attribs.title,
       thumbnail: img.attribs.src,

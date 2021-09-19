@@ -10,6 +10,7 @@ export interface RecentMangaChapter {
 }
 
 export interface RecentManga {
+  id: string;
   name: string;
   url: string;
   author: string;
@@ -18,6 +19,7 @@ export interface RecentManga {
 }
 
 export interface PopularManga {
+  id: string;
   name: string;
   url: string;
   thumbnail: string;

@@ -19,24 +19,18 @@ export async function request<T = any>(
   return await r.json();
 }
 
-export async function home() {
-  const data = await request<Home>("/home", {});
-  return data;
+export function home() {
+  return request<Home>("/home", {});
 }
 
-export async function search(q: string) {
-  const data = await request<SearchResult[]>("/search", { q });
-  return data;
+export function search(q: string) {
+  return request<SearchResult[]>("/search", { q });
 }
 
-export async function fetchManga(name: string) {
-  const data = await request<Manga>("/manga", { id: name });
-  return data;
+export function manga(name: string) {
+  return request<Manga>("/manga", { id: name });
 }
 
-export async function fetchChapter(manga: string, number: number) {
-  const data = await request("/chapter", { id: manga, chapter: number }).then(
-    (e) => e.pages as ChapterPage[],
-  );
-  return data;
+export function chapter(manga: string, number: number) {
+  return request<ChapterPage[]>("/chapter", { id: manga, chapter: number });
 }
