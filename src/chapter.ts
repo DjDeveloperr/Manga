@@ -30,7 +30,3 @@ export async function scrapeChapter(
 
   return pages;
 }
-
-if (import.meta.url) {
-  console.log(await scrapeChapter(Deno.args[0], Number(Deno.args[1])));
-}
