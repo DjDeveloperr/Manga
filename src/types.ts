@@ -59,7 +59,8 @@ export interface Manga {
 
 export interface MangaChapter {
   title: string;
-  chapter: number;
+  // chapter: number;
+  // vol: number;
   views: number;
   uploaded: string;
 }

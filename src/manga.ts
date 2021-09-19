@@ -64,27 +64,27 @@ export async function scrapeManga(id: string): Promise<Manga> {
         let c: any = {};
         c.title = s[0];
 
-        if (c.title.includes("Vol") || c.title.includes("Chapter")) {
-          if (c.title.includes("Vol")) {
-            let match = c.title.match(/Vol(\.)?\d+/);
-            if (match) {
-              c.volume = parseInt(match[0].replaceAll(/\D/g, "").trim()) ??
-                undefined;
-            }
-          }
-          if (c.title.includes("Chapter")) {
-            let match = c.title.match(/Chapter \d+/);
-            if (match) {
-              c.chapter = parseInt(match[0].replaceAll(/\D/g, "").trim()) ??
-                undefined;
-            }
-          }
-          if (c.title.includes(":")) {
-            let spl = c.title.split(":");
-            spl.shift();
-            c.title = spl.join(":").trim();
-          }
-        }
+        // if (c.title.includes("Vol") || c.title.includes("Chapter")) {
+        //   if (c.title.includes("Vol")) {
+        //     let match = c.title.match(/Vol(\.)?\d+/);
+        //     if (match) {
+        //       c.volume = parseInt(match[0].replaceAll(/\D/g, "").trim()) ??
+        //         undefined;
+        //     }
+        //   }
+        //   if (c.title.includes("Chapter")) {
+        //     let match = c.title.match(/Chapter \d+/);
+        //     if (match) {
+        //       c.chapter = parseInt(match[0].replaceAll(/\D/g, "").trim()) ??
+        //         undefined;
+        //     }
+        //   }
+        //   if (c.title.includes(":")) {
+        //     let spl = c.title.split(":");
+        //     spl.shift();
+        //     c.title = spl.join(":").trim();
+        //   }
+        // }
         c.views = parseInt(s[1]?.replaceAll(/\D/g, "").trim()) ?? 0;
         c.uploaded = s[2];
         return c;
