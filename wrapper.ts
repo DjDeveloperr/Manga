@@ -1,8 +1,10 @@
+import { ChapterPage, Home, Manga, SearchResult } from "./src/types.ts";
+
 export const API_BASE = "https://manga.deno.dev/api";
 
 export async function request<T = any>(
   path: string,
-  params: Record<string, any>
+  params: Record<string, any>,
 ): Promise<T> {
   let url = API_BASE + path;
   const query = Object.entries(params);
@@ -17,68 +19,24 @@ export async function request<T = any>(
   return await r.json();
 }
 
-export interface MangaSearchResult {
-  id: string;
-  name: string;
-  nameUnsigned: string;
-  lastChapter: string;
-  image: string;
-  author: string;
-  storyLink: string;
-  fetch: () => Promise<MangaInfo>;
+export async function home() {
+  const data = await request<Home>("/home", {});
+  return data;
 }
 
 export async function search(q: string) {
-  const data = await request<MangaSearchResult[]>("/search", { q });
-  data.forEach((e) => {
-    e.fetch = () => {
-      return fetchManga(e.nameUnsigned);
-    };
-  });
+  const data = await request<SearchResult[]>("/search", { q });
   return data;
-}
-
-export interface MangaChapter {
-  title: string;
-  chapter: number;
-  volume?: number;
-  views: number;
-  uploaded: string;
-  fetch: () => Promise<PageInfo[]>;
-}
-
-export interface MangaInfo {
-  title: string;
-  description: string;
-  thumbnail: string;
-  authors: string;
-  status: string;
-  genres: string[];
-  updated: string;
-  views: number;
-  rating: string;
-  chapters: MangaChapter[];
 }
 
 export async function fetchManga(name: string) {
-  const data = await request<MangaInfo>("/manga", { name });
-  data.chapters.forEach((e) => {
-    e.fetch = () => {
-      return fetchChapter(name, e.chapter);
-    };
-  });
+  const data = await request<Manga>("/manga", { id: name });
   return data;
 }
 
-export interface PageInfo {
-  title: string;
-  src: string;
-  number: number;
-}
-
 export async function fetchChapter(manga: string, number: number) {
-  const data = await request("/chapter", { manga, number }).then(
-    (e) => e.pages as PageInfo[]
+  const data = await request("/chapter", { id: manga, chapter: number }).then(
+    (e) => e.pages as ChapterPage[],
   );
   return data;
 }
