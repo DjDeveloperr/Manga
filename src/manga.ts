@@ -81,5 +81,3 @@ export async function scrapeManga(id: string): Promise<Manga> {
 
   return manga;
 }
-
-console.log(await scrapeManga(Deno.args[0]));
