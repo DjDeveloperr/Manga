@@ -24,6 +24,7 @@ export async function scrapeChapter(
           .replaceAll("- MangaNato.com", "")
           .trim(),
         url: e.attribs.src,
+        proxyURL: `https://manga-proxy.deno.dev/?q=${encodeURIComponent(e.attribs.src)}`,
       });
     }
   });
