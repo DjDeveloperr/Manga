@@ -20,7 +20,7 @@ export async function search(query: string): Promise<SearchResult[]> {
     nameUnsigned: e.nameunsigned,
     lastChapter: e.lastchapter,
     thumbnail: e.image,
-    author: e.author,
+    author: e.author.replaceAll(/(<([^>]+)>)/ig, "").trim(),
     url: e.link_story,
   }));
 }
