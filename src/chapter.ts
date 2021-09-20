@@ -3,9 +3,9 @@ import { scrape } from "./util.ts";
 
 export async function scrapeChapter(
   id: string,
-  chapter: number,
+  chapter: string,
 ): Promise<ChapterPage[]> {
-  const $ = await scrape(`${READ_BASE_URL}/${id}/chapter-${chapter}`);
+  const $ = await scrape(`${READ_BASE_URL}/${id}/${chapter}`);
 
   const pages: ChapterPage[] = [];
   const sel = $(".container-chapter-reader").children("img");

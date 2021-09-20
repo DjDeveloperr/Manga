@@ -27,7 +27,7 @@ serve({
           name: "Get Chapter Pages",
           path: "/api/chapter",
           params: {
-            chapter: "Chapter number",
+            chapter: "Chapter ID",
             id: "Manga ID",
           },
         },
@@ -66,10 +66,10 @@ serve({
 
   "/api/chapter": async (req) => {
     const q = new URL(req.url).searchParams;
-    const chapter = parseInt(q.get("chapter") ?? "");
+    const chapter = q.get("chapter");
     const manga = q.get("id");
-    if (!chapter || isNaN(chapter) || !manga) {
-      return json({ error: "Chapter or ID not present in query" }, {
+    if (!chapter || !manga) {
+      return json({ error: "Chapter ID or Manga ID not present in query" }, {
         status: 404,
       });
     }
