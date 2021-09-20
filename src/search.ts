@@ -24,15 +24,3 @@ export async function search(query: string): Promise<SearchResult[]> {
     url: e.link_story,
   }));
 }
-
-const data = [{
-  "id": "1059",
-  "id_encode": "kiss_x_sis",
-  "name":
-    '<span style="color: #FF530D;font-weight: bold;">kiss<\/span> <span style="color: #FF530D;font-weight: bold;">x<\/span> <span style="color: #FF530D;font-weight: bold;">sis<\/span>',
-  "nameunsigned": "kiss_x_sis",
-  "lastchapter": "Chapter 149: More conscious",
-  "image": "https:\/\/avt.mkklcdnv6temp.com\/38\/n\/1-1583465211.jpg",
-  "author": "Ditama Bow",
-  "link_story": "https:\/\/readmanganato.com\/manga-kh952416",
-}];
