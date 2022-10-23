@@ -111,8 +111,9 @@ ${
     ),
 
   "/api": () =>
-    json({
-      endpoints: [
+    html(
+      "API Endpoints",
+      "<h3>API Endpoints</h3>" + [
         {
           name: "Home - Popular and Recent Mangas",
           path: "/api/home",
@@ -152,8 +153,24 @@ ${
             id: "Manga ID",
           },
         },
-      ],
-    }),
+      ].map((e) =>
+        `<h4>${e.name}</h4>\nPath: ${e.path}${
+          e.params
+            ? `\nQuery Params: <ul>${
+              Object.entries(e.params).map(([k, v]) => `<li>${k}: ${v}</li>`)
+                .join("")
+            }</ul>`
+            : ""
+        }${
+          e.body
+            ? `\Body JSON: <ul>${
+              Object.entries(e.body).map(([k, v]) => `<li>${k}: ${v}</li>`)
+                .join("")
+            }</ul>`
+            : ""
+        }`
+      ).join(""),
+    ),
 
   "/api/home": async (_) => {
     const home = await scrapeHome();
