@@ -68,10 +68,6 @@ serve({
       )
     ),
 
-  "/advanced_search": async (req) => {
-    return json(await advancedSearch(req.body ? await req.json() : {}));
-  },
-
   "/manga/:id": (_, __, p) =>
     scrapeManga(p!.id).then((manga) =>
       html(
@@ -129,6 +125,19 @@ ${
           },
         },
         {
+          name: "Browse (Advanced Search)",
+          path: "/api/browse",
+          body: {
+            page: "Page number",
+            orderBy: "Order By (0, 1, 2, 3)",
+            status: "Status (0, 1, 2)",
+            keyword: "Keyword type for search (0, 1, 2, 3)",
+            query: "Query for search",
+            included: "Genres to include",
+            excluded: "Genres to exclude",
+          },
+        },
+        {
           name: "Get Manga info (including chapters)",
           path: "/api/manga",
           params: {
@@ -161,6 +170,10 @@ ${
     return json(
       await search(name) as any,
     );
+  },
+
+  "/api/browse": async (req) => {
+    return json(await advancedSearch(req.body ? await req.json() : {}));
   },
 
   "/api/manga": async (req) => {
