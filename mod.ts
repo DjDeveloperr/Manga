@@ -163,7 +163,7 @@ ${
             : ""
         }${
           e.body
-            ? `\Body JSON: <ul>${
+            ? `\nBody JSON: <ul>${
               Object.entries(e.body).map(([k, v]) => `<li>${k}: ${v}</li>`)
                 .join("")
             }</ul>`
