@@ -16,6 +16,12 @@ export async function scrapeManga(id: string): Promise<Manga> {
 
     thumbnail: $(".info-image > img:nth-child(1)").attr("src")!,
 
+    alternative: $(
+      ".variations-tableInfo > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(2)",
+    )
+      .text()
+      .trim(),
+
     authors: $(
       ".variations-tableInfo > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(2)",
     )

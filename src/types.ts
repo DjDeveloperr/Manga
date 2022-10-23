@@ -45,6 +45,7 @@ export interface SearchResult {
 export interface Manga {
   id: string;
   title: string;
+  alternative: string;
   description: string;
   thumbnail: string;
   authors: string;
