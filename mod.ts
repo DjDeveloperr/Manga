@@ -25,11 +25,12 @@ function html(title: string, str: string) {
 }
 
 serve({
-  "/": () => scrapeHome().then(home => html("Home", `<form onsubmit="const el = document.getElementById("search"); location.href = '/search?q=' + encodeURIComponent(el.value || '');"><input id="search" type="text" placeholder="Search..." /> <input type="submit" value="Search" /> </form> <h3>Popular Manga</h3><ul>${
+  "/": () => scrapeHome().then(home => html("Home", `<form onsubmit="const el = document.getElementById('search'); location.href = '/search?q=' + encodeURIComponent(el.value || '');"><input id="search" type="text" placeholder="Search..." /> <input type="submit" value="Search" /> </form> <h3>Popular Manga</h3><ul>${
     home.popular.map(manga => `<li><a href="/manga/${manga.id}">${manga.name}</a> (<a href="${manga.thumbnail}">Img</a>)</li>`).join("")
   }</ul><h3>Recent Manga</h3><ul>${
-    home.recent.map(manga => `<li><a href="/manga/${manga.id}">${manga.name}</a> by ${manga.author} (<a href="${manga.thumbnail}">Img</a></li>`).join("")
+    home.recent.map(manga => `<li><a href="/manga/${manga.id}">${manga.name}</a> by ${manga.author} (<a href="${manga.thumbnail}">Img</a>)</li>`).join("")
   }`)),
+  "/search": (req) => search(new URL(req.url).searchParams.get("q") || "").then(res => html("Search Results", res.length == 0 ? "No results" : `<ul>${res.map(e => `<li><a href="/manga/${e.url.split("/").pop()}">${e.name}</a> by ${e.author}</li>`)}</ul>`)),
   "/manga/:id": (_, __, { id }) => scrapeManga(id).then(manga => html(`Manga - ${manga.title}`, `
 <h3>${manga.title}</h3>
 Thumbnail: <a href="${manga.thumbnail}">Link</a>
