@@ -27,7 +27,7 @@ export async function scrapeHome(): Promise<Home> {
       name: img.attribs.alt,
       thumbnail: img.attribs.src,
       url: link.attribs.href,
-      chapterId: urlCont3.attribs.href.split("/").pop()!,
+      chapterId: urlCont3.attribs as any,
       chapter: urlCont3.attribs.title,
     });
   });
