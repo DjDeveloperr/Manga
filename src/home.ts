@@ -66,7 +66,9 @@ export async function scrapeHome(): Promise<Home> {
     recent.push({
       id: link.attribs.href.split("/").pop()!,
       name: img.attribs.alt,
-      author: author.attribs.title,
+      author: (author.firstChild as any).data.split(",").map((
+        e: string,
+      ) => e.trim()).join(", "),
       thumbnail: img.attribs.src,
       url: link.attribs.href,
       chapters,
