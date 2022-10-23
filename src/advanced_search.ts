@@ -200,9 +200,3 @@ export async function advancedSearch(options: AdvancedSearchOptions = {}) {
 
   return results;
 }
-
-console.log(
-  await advancedSearch({
-    included: [Genre.Ecchi],
-  }),
-);
