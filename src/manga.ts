@@ -44,8 +44,7 @@ export async function scrapeManga(id: string): Promise<Manga> {
 
     views: $(".story-info-right-extent > p:nth-child(2) > span:nth-child(2)")
       .text()
-      .trim()
-      .replaceAll(/\D/g, ""),
+      .trim(),
 
     rating: $("#rate_row_cmd > em:nth-child(1)")
       .text()
