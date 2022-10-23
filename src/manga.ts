@@ -1,5 +1,6 @@
 import { Manga, READ_BASE_URL } from "./types.ts";
 import { assertTag, scrape } from "./util.ts";
+import { cheerio } from "../deps.ts";
 
 export async function scrapeManga(id: string): Promise<Manga> {
   const $ = await scrape(READ_BASE_URL + "/" + id);
@@ -41,12 +42,10 @@ export async function scrapeManga(id: string): Promise<Manga> {
       .text()
       .trim(),
 
-    views: parseInt(
-      $(".story-info-right-extent > p:nth-child(2) > span:nth-child(2)")
-        .text()
-        .trim()
-        .replaceAll(/\D/g, ""),
-    ) ?? 0,
+    views: $(".story-info-right-extent > p:nth-child(2) > span:nth-child(2)")
+      .text()
+      .trim()
+      .replaceAll(/\D/g, ""),
 
     rating: $("#rate_row_cmd > em:nth-child(1)")
       .text()
@@ -61,16 +60,16 @@ export async function scrapeManga(id: string): Promise<Manga> {
   $(".row-content-chapter").children(".a-h").each((_, e) => {
     assertTag(e);
     const children = e.children.filter((e) => e.type === "tag");
-    const link = children[0];
-    const viewsE = children[1];
-    const uploadedE = children[2];
+    const link = children[0] as cheerio.Element;
+    const viewsE = children[1] as cheerio.Element;
+    const uploadedE = children[2] as cheerio.Element;
     assertTag(link);
     assertTag(viewsE);
     assertTag(uploadedE);
-    const title = link.firstChild!.data! ?? "";
+    const title = (link.firstChild! as any).data! ?? "";
     const url = link.attribs.href;
-    const views = parseInt(viewsE.firstChild!.data!.replaceAll(/\D/g, "")) ?? 0;
-    const uploaded = (uploadedE.firstChild!.data) ?? "";
+    const views = (viewsE.firstChild! as any).data!.trim();
+    const uploaded = ((uploadedE.firstChild! as any).data) ?? "";
     manga.chapters.push({
       id: url.split("/").pop()!,
       title,

@@ -1,8 +1,10 @@
-import { json, serve, html } from "./deps.ts";
+import { json, serve } from "./deps.ts";
+import { advancedSearch } from "./src/advanced_search.ts";
 import { scrapeChapter, scrapeHome, scrapeManga, search } from "./src/mod.ts";
 
 function html(title: string, str: string) {
-  return new Response(`<!DOCTYPE HTML>
+  return new Response(
+    `<!DOCTYPE HTML>
 <html lang="en-US">
   <head>
     <meta charset="utf-8" />
@@ -24,21 +26,57 @@ function html(title: string, str: string) {
     }
     </script>
   </body>
-</html>`, {
-    headers: {
-      "content-type": "text/html; charset=UTF-8",
+</html>`,
+    {
+      headers: {
+        "content-type": "text/html; charset=UTF-8",
+      },
     },
-  });
+  );
 }
 
 serve({
-  "/": () => scrapeHome().then(home => html("Home", `<input id="search" type="text" placeholder="Search..." /> <button onclick="search()">Search</button> <h3>Popular Manga</h3><ul>${
-    home.popular.map(manga => `<li><a href="/manga/${manga.id}">${manga.name}</a> (<a href="${manga.thumbnail}">Img</a>)</li>`).join("")
-  }</ul><h3>Recent Manga</h3><ul>${
-    home.recent.map(manga => `<li><a href="/manga/${manga.id}">${manga.name}</a> by ${manga.author} (<a href="${manga.thumbnail}">Img</a>)</li>`).join("")
-  }`)),
-  "/search": (req) => search(new URL(req.url).searchParams.get("q") || "").then(res => html("Search Results", res.length == 0 ? "No results" : `<ul>${res.map(e => `<li><a href="/manga/${e.url.split("/").pop()}">${e.name}</a> by ${e.author}</li>`).join("")}</ul>`)),
-  "/manga/:id": (_, __, { id }) => scrapeManga(id).then(manga => html(`Manga - ${manga.title}`, `
+  "/": () =>
+    scrapeHome().then((home) =>
+      html(
+        "Home",
+        `<input id="search" type="text" placeholder="Search..." /> <button onclick="search()">Search</button> <h3>Popular Manga</h3><ul>${
+          home.popular.map((manga) =>
+            `<li><a href="/manga/${manga.id}">${manga.name}</a> (<a href="${manga.thumbnail}">Img</a>)</li>`
+          ).join("")
+        }</ul><h3>Recent Manga</h3><ul>${
+          home.recent.map((manga) =>
+            `<li><a href="/manga/${manga.id}">${manga.name}</a> by ${manga.author} (<a href="${manga.thumbnail}">Img</a>)</li>`
+          ).join("")
+        }`,
+      )
+    ),
+
+  "/search": (req) =>
+    search(new URL(req.url).searchParams.get("q") || "").then((res) =>
+      html(
+        "Search Results",
+        res.length == 0
+          ? "No results"
+          : `<ul>${
+            res.map((e) =>
+              `<li><a href="/manga/${
+                e.url.split("/").pop()
+              }">${e.name}</a> by ${e.author}</li>`
+            ).join("")
+          }</ul>`,
+      )
+    ),
+
+  "/advanced_search": async (req) => {
+    return json(await advancedSearch(req.body ? await req.json() : {}));
+  },
+
+  "/manga/:id": (_, __, p) =>
+    scrapeManga(p!.id).then((manga) =>
+      html(
+        `Manga - ${manga.title}`,
+        `
 <h3>${manga.title}</h3>
 Thumbnail: <a href="${manga.thumbnail}">Link</a>
 <p>${manga.description}</p>
@@ -52,12 +90,30 @@ Thumbnail: <a href="${manga.thumbnail}">Link</a>
 </ul>
 <h4>Chapters</h4>
 <ul>
-  ${manga.chapters.map(c => `<li><a href="/manga/${manga.id}/${c.id}">${c.title}</a> (${c.views} views) (${c.uploaded})</li>`).join("")}
+  ${
+          manga.chapters.map((c) =>
+            `<li><a href="/manga/${manga.id}/${c.id}">${c.title}</a> (${c.views} views) (${c.uploaded})</li>`
+          ).join("")
+        }
 </ul>
-`)),
-  "/manga/:id/:chapter": (_, __, { id, chapter }) => scrapeChapter(id, chapter).then(pages => html(`Manga Reader`, `
-${pages.map(p => `<img src="${p.proxyURL}" alt="${p.title}" />`).join("<br/>")}
-`)),
+`,
+      )
+    ) as any,
+
+  "/manga/:id/:chapter": (_, __, p) =>
+    scrapeChapter(p!.id, p!.chapter).then((pages) =>
+      html(
+        `Manga Reader`,
+        `
+${
+          pages.map((p) => `<img src="${p.proxyURL}" alt="${p.title}" />`).join(
+            "<br/>",
+          )
+        }
+`,
+      )
+    ),
+
   "/api": () =>
     json({
       endpoints: [
