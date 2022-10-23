@@ -1,4 +1,4 @@
-import { cheerio, TagElement, TextElement } from "../deps.ts";
+import { cheerio } from "../deps.ts";
 import { BASE_URL, USER_AGENT } from "./types.ts";
 
 export async function scrapeFetch(path: string, options: RequestInit = {}) {
@@ -17,12 +17,13 @@ export async function scrapeFetch(path: string, options: RequestInit = {}) {
 export async function scrape(page: string) {
   const res = await scrapeFetch(page);
   const html = await res.text();
+  if (html.includes("404 - PAGE NOT FOUND")) throw new Error("404");
   return cheerio.load(html);
 }
 
 export function assertTag(
-  element: TagElement | TextElement,
-): asserts element is TagElement {
+  element: cheerio.Element | cheerio.Element,
+): asserts element is cheerio.Element {
   if (element.type !== "tag") {
     throw new Error(`Assertion Failed: Element is not type of tag`);
   }

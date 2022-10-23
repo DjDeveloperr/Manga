@@ -27,7 +27,8 @@ export async function scrapeHome(): Promise<Home> {
       name: img.attribs.alt,
       thumbnail: img.attribs.src,
       url: link.attribs.href,
-      chapter: parseInt(urlCont3.attribs.title.replaceAll(/\D/g, "").trim()),
+      chapterId: urlCont3.attribs.href.split("/").pop()!,
+      chapter: urlCont3.attribs.title,
     });
   });
 
@@ -56,17 +57,18 @@ export async function scrapeHome(): Promise<Home> {
       if (link?.type !== "tag" || ago?.type !== "tag") return;
 
       chapters.push({
-        chapter: parseInt(
-          (link.attribs.title || "0").split(" ").pop()!.replaceAll(/\D/g, ""),
-        ),
-        ago: ago.children[0].data?.trim(),
+        id: link.attribs.href.split("/").pop()!,
+        chapter: link.attribs.title.trim(),
+        ago: (ago.children[0] as any).data?.trim(),
       });
     });
 
     recent.push({
       id: link.attribs.href.split("/").pop()!,
       name: img.attribs.alt,
-      author: author.attribs.title,
+      author: (author.firstChild as any).data.split(",").map((
+        e: string,
+      ) => e.trim()).join(", "),
       thumbnail: img.attribs.src,
       url: link.attribs.href,
       chapters,
