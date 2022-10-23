@@ -18,6 +18,7 @@ function html(title: string, str: string) {
   <body>
     <h2 onclick="location.href = '/';">Manga Reader</h2>
     <input id="search" type="text" placeholder="Search..." /> <button onclick="search()">Search</button>
+    <br />
     ${str}
     <script>
     function search() {
