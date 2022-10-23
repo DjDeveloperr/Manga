@@ -25,7 +25,7 @@ function html(title: string, str: string) {
 }
 
 serve({
-  "/": () => scrapeHome().then(home => html("Home", `<h3>Popular Manga</h3><ul>${
+  "/": () => scrapeHome().then(home => html("Home", `<form onsubmit="const el = document.getElementById("search"); location.href = '/search?q=' + encodeURIComponent(el.value || '');"><input id="search" type="text" placeholder="Search..." /> <input type="submit" value="Search" /> </form> <h3>Popular Manga</h3><ul>${
     home.popular.map(manga => `<li><a href="/manga/${manga.id}">${manga.name}</a> (<a href="${manga.thumbnail}">Img</a>)</li>`).join("")
   }</ul><h3>Recent Manga</h3><ul>${
     home.recent.map(manga => `<li><a href="/manga/${manga.id}">${manga.name}</a> by ${manga.author} (<a href="${manga.thumbnail}">Img</a></li>`).join("")
