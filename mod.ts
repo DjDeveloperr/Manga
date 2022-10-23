@@ -9,8 +9,6 @@ function html(title: string, str: string) {
     <title>${title}</title>
     <style>
       body {
-        background-color: black;
-        color: white;
         font: sans-serif;
       }
     </style>
@@ -28,8 +26,27 @@ function html(title: string, str: string) {
 
 serve({
   "/": () => scrapeHome().then(home => html("Home", `<h3>Popular Manga</h3><ul>${
-    home.popular.map(manga => `<li><a href="/manga/${manga.id}">${manga.name}</a></li>`)
-  }</ul>`)),
+    home.popular.map(manga => `<li><a href="/manga/${manga.id}">${manga.name}</a> (<a href="${manga.thumbnail}">Img</a>)</li>`).join("")
+  }</ul><h3>Recent Manga</h3><ul>${
+    home.recent.map(manga => `<li><a href="/manga/${manga.id}">${manga.name}</a> by ${manga.author} (<a href="${manga.thumbnail}">Img</a></li>`).join("")
+  }`)),
+  "/manga/:id": (_, __, { id }) => scrapeManga(id).then(manga => html(`Manga - ${manga.title}`, `
+<h3>${manga.title}</h3>
+Thumbnail: <a href="${manga.thumbnail}">Link</a>
+<p>${manga.description}</p>
+<ul>
+  <li>Authors: ${manga.authors}</li>
+  <li>Status: ${manga.status}</li>
+  <li>Genres: ${manga.genres.join(", ")}</li>
+  <li>Last Updated: ${manga.lastUpdated}</li>
+  <li>Views: ${manga.views}</li>
+  <li>Rating: ${manga.rating}</li>
+</ul>
+<h4>Chapters</h4>
+<ul>
+  ${manga.chapters.map(c => `<li><a href="/manga/${manga.id}/${c.id}">${c.title}</a> (${c.views} views) (${c.uploaded})</li>`)}
+</ul>
+`)),
   "/api": () =>
     json({
       endpoints: [
