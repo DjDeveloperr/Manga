@@ -70,4 +70,5 @@ export interface ChapterPage {
   number: number;
   title: string;
   url: string;
+  proxyURL: string;
 }

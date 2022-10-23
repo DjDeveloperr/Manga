@@ -1,8 +1,64 @@
-import { json, serve } from "./deps.ts";
+import { json, serve, html } from "./deps.ts";
 import { scrapeChapter, scrapeHome, scrapeManga, search } from "./src/mod.ts";
 
+function html(title: string, str: string) {
+  return new Response(`<!DOCTYPE HTML>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <title>${title}</title>
+    <style>
+      body {
+        font: sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <h2 onclick="location.href = '/';">Manga Reader</h2>
+    ${str}
+    <script>
+    function search() {
+      const el = document.getElementById('search');
+      const newpath = '/search?q=' + encodeURIComponent(el.value || '');
+      location.href = newpath;
+    }
+    </script>
+  </body>
+</html>`, {
+    headers: {
+      "content-type": "text/html; charset=UTF-8",
+    },
+  });
+}
+
 serve({
-  "/": () =>
+  "/": () => scrapeHome().then(home => html("Home", `<input id="search" type="text" placeholder="Search..." /> <button onclick="search()">Search</button> <h3>Popular Manga</h3><ul>${
+    home.popular.map(manga => `<li><a href="/manga/${manga.id}">${manga.name}</a> (<a href="${manga.thumbnail}">Img</a>)</li>`).join("")
+  }</ul><h3>Recent Manga</h3><ul>${
+    home.recent.map(manga => `<li><a href="/manga/${manga.id}">${manga.name}</a> by ${manga.author} (<a href="${manga.thumbnail}">Img</a>)</li>`).join("")
+  }`)),
+  "/search": (req) => search(new URL(req.url).searchParams.get("q") || "").then(res => html("Search Results", res.length == 0 ? "No results" : `<ul>${res.map(e => `<li><a href="/manga/${e.url.split("/").pop()}">${e.name}</a> by ${e.author}</li>`).join("")}</ul>`)),
+  "/manga/:id": (_, __, { id }) => scrapeManga(id).then(manga => html(`Manga - ${manga.title}`, `
+<h3>${manga.title}</h3>
+Thumbnail: <a href="${manga.thumbnail}">Link</a>
+<p>${manga.description}</p>
+<ul>
+  <li>Authors: ${manga.authors}</li>
+  <li>Status: ${manga.status}</li>
+  <li>Genres: ${manga.genres.join(", ")}</li>
+  <li>Last Updated: ${manga.lastUpdated}</li>
+  <li>Views: ${manga.views}</li>
+  <li>Rating: ${manga.rating}</li>
+</ul>
+<h4>Chapters</h4>
+<ul>
+  ${manga.chapters.map(c => `<li><a href="/manga/${manga.id}/${c.id}">${c.title}</a> (${c.views} views) (${c.uploaded})</li>`).join("")}
+</ul>
+`)),
+  "/manga/:id/:chapter": (_, __, { id, chapter }) => scrapeChapter(id, chapter).then(pages => html(`Manga Reader`, `
+${pages.map(p => `<img src="${p.proxyURL}" alt="${p.title}" />`).join("<br/>")}
+`)),
+  "/api": () =>
     json({
       endpoints: [
         {
