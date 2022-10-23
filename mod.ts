@@ -15,7 +15,9 @@ function html(title: string, str: string) {
     <script>
     function search() {
       const el = document.getElementById('search');
-      location.href = '/search?q=' + encodeURIComponent(el.value || '');
+      const newpath = '/search?q=' + encodeURIComponent(el.value || '');
+      console.log("navigating to", newpath);
+      location.href = newpath;
     }
     </script>
   </head>
