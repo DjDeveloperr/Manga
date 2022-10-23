@@ -130,9 +130,12 @@ ${
           path: "/api/browse",
           body: {
             page: "Page number",
-            orderBy: "Order By (0, 1, 2, 3)",
-            status: "Status (0, 1, 2)",
-            keyword: "Keyword type for search (0, 1, 2, 3)",
+            orderBy:
+              "Order By (0 = Last Updated, 1 = Top Viewed, 2 = New Manga, 3 = A-Z)",
+            status:
+              "Status (0 = Ongoing / Completed, 1 = Ongoing, 2 = Completed)",
+            keyword:
+              "Keyword type for search (0 = Everything, 1 = Name Title, 2 = Alternative Name, 3 = Author)",
             query: "Query for search",
             included: "Genres to include",
             excluded: "Genres to exclude",
@@ -149,12 +152,12 @@ ${
           name: "Get Chapter Pages",
           path: "/api/chapter",
           params: {
-            chapter: "Chapter ID",
             id: "Manga ID",
+            chapter: "Chapter ID",
           },
         },
       ].map((e) =>
-        `<h4>${e.name}</h4>\nPath: ${e.path}${
+        `<h4>${e.name}</h4>\n<p>Path: <code>${e.path}</code></p>${
           e.params
             ? `\nQuery Params: <ul>${
               Object.entries(e.params).map(([k, v]) => `<li>${k}: ${v}</li>`)
