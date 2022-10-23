@@ -12,18 +12,17 @@ function html(title: string, str: string) {
         font: sans-serif;
       }
     </style>
-    <script>
-    function search() {
-      const el = document.getElementById('search');
-      const newpath = '/search?q=' + encodeURIComponent(el.value || '');
-      console.log("navigating to", newpath);
-      location.href = newpath;
-    }
-    </script>
   </head>
   <body>
     <h2 onclick="location.href = '/';">Manga Reader</h2>
     ${str}
+    <script>
+    function search() {
+      const el = document.getElementById('search');
+      const newpath = '/search?q=' + encodeURIComponent(el.value || '');
+      location.href = newpath;
+    }
+    </script>
   </body>
 </html>`, {
     headers: {
@@ -33,7 +32,7 @@ function html(title: string, str: string) {
 }
 
 serve({
-  "/": () => scrapeHome().then(home => html("Home", `<form onsubmit="search()"><input id="search" type="text" placeholder="Search..." /> <input type="submit" value="Search" onclick="search()" /> </form> <h3>Popular Manga</h3><ul>${
+  "/": () => scrapeHome().then(home => html("Home", `<input id="search" type="text" placeholder="Search..." /> <button onclick="search()">Search</button> <h3>Popular Manga</h3><ul>${
     home.popular.map(manga => `<li><a href="/manga/${manga.id}">${manga.name}</a> (<a href="${manga.thumbnail}">Img</a>)</li>`).join("")
   }</ul><h3>Recent Manga</h3><ul>${
     home.recent.map(manga => `<li><a href="/manga/${manga.id}">${manga.name}</a> by ${manga.author} (<a href="${manga.thumbnail}">Img</a>)</li>`).join("")
