@@ -41,7 +41,7 @@ serve({
     scrapeHome().then((home) =>
       html(
         "Home",
-        `<h3>API</h3><ul><li><a href="/endpoints">Endpoints</a></li><li><a href="https://github.com/DjDeveloperr/Manga">GitHub</a></li></ul><h3>Popular Manga</h3><ul>${
+        `<h3>API</h3><ul><li><a href="/api">Endpoints</a></li><li><a href="https://github.com/DjDeveloperr/Manga">GitHub</a></li></ul><h3>Popular Manga</h3><ul>${
           home.popular.map((manga) =>
             `<li><a href="/manga/${manga.id}">${manga.name}</a> (<a href="${manga.thumbnail}">Img</a>)</li>`
           ).join("")
