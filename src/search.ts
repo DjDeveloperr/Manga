@@ -13,7 +13,7 @@ export async function search(query: string): Promise<SearchResult[]> {
 	}).then((e) => e.json());
 
 	return data.searchlist.map((e: any) => ({
-		id: e.link_story.split("/").pop()!,
+		id: e.id,
 		internalId: e.id,
 		idEncoded: e.id,
 		name: e.name.replaceAll(/(<([^>]+)>)/gi, "").trim(),
