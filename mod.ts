@@ -1,8 +1,36 @@
-import { json, serve } from "./deps.ts";
+import { json, serve, html } from "./deps.ts";
 import { scrapeChapter, scrapeHome, scrapeManga, search } from "./src/mod.ts";
 
+function html(title: string, str: string) {
+  return new Response(`<!DOCTYPE HTML>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <title>${title}</title>
+    <style>
+      body {
+        background-color: black;
+        color: white;
+        font: sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Manga Reader</h2>
+    ${str}
+  </body>
+</html>`, {
+    headers: {
+      "content-type": "text/html; charset=UTF-8",
+    },
+  });
+}
+
 serve({
-  "/": () =>
+  "/": () => scrapeHome().then(home => html("Home", `<h3>Popular Manga</h3><ul>${
+    home.popular.map(manga => `<li><a href="/manga/${manga.id}">${manga.name}</a></li>`)
+  }</ul>`)),
+  "/api": () =>
     json({
       endpoints: [
         {
