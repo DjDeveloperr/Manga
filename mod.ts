@@ -14,7 +14,7 @@ function html(title: string, str: string) {
     </style>
   </head>
   <body>
-    <h2>Manga Reader</h2>
+    <h2 onclick="location.href = '/';">Manga Reader</h2>
     ${str}
   </body>
 </html>`, {
