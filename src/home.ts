@@ -27,7 +27,7 @@ export async function scrapeHome(): Promise<Home> {
       name: img.attribs.alt,
       thumbnail: img.attribs.src,
       url: link.attribs.href,
-      chapterId: urlCont3.attribs as any,
+      chapterId: urlCont3.attribs.href.split("/").pop()!,
       chapter: urlCont3.attribs.title,
     });
   });
@@ -57,7 +57,7 @@ export async function scrapeHome(): Promise<Home> {
       if (link?.type !== "tag" || ago?.type !== "tag") return;
 
       chapters.push({
-        id: link.attribs.src.split("/").pop()!,
+        id: link.attribs.href.split("/").pop()!,
         chapter: link.attribs.title.trim(),
         ago: (ago.children[0] as any).data?.trim(),
       });
