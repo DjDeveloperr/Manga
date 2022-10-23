@@ -44,8 +44,11 @@ Thumbnail: <a href="${manga.thumbnail}">Link</a>
 </ul>
 <h4>Chapters</h4>
 <ul>
-  ${manga.chapters.map(c => `<li><a href="/manga/${manga.id}/${c.id}">${c.title}</a> (${c.views} views) (${c.uploaded})</li>`)}
+  ${manga.chapters.map(c => `<li><a href="/manga/${manga.id}/${c.id}">${c.title}</a> (${c.views} views) (${c.uploaded})</li>`).join("")}
 </ul>
+`)),
+  "/manga/:id/:chapter": (_, __, { id, chapter }) => scrapeChapter(id, chapter).then(pages => html(`Manga Reader`, `
+${pages.map(p => `<img src="${p.proxyURL}" alt="${p.title}" />`).join("<br/>")}
 `)),
   "/api": () =>
     json({
