@@ -184,7 +184,9 @@ export async function advancedSearch(options: AdvancedSearchOptions = {}) {
     result.description = (rd.firstChild as any).data.trim();
     result.views = (rpv.firstChild as any).data.trim();
     result.lastUpdated = (rpd.firstChild as any).data.trim();
-    result.author = (rpa.firstChild as any).data.trim();
+    result.author = rpa.firstChild
+      ? (rpa.firstChild as any).data.trim()
+      : "Updating";
     result.latestChapter = {
       id: (ra.attribs.href as string).split("/").pop()!,
       title: (ra.firstChild as any).data,
