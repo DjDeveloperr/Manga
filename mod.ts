@@ -17,6 +17,7 @@ function html(title: string, str: string) {
   </head>
   <body>
     <h2 onclick="location.href = '/';">Manga Reader</h2>
+    <input id="search" type="text" placeholder="Search..." /> <button onclick="search()">Search</button>
     ${str}
     <script>
     function search() {
@@ -40,7 +41,7 @@ serve({
     scrapeHome().then((home) =>
       html(
         "Home",
-        `<input id="search" type="text" placeholder="Search..." /> <button onclick="search()">Search</button> <h3>Popular Manga</h3><ul>${
+        `<h3>API</h3><ul><li><a href="/endpoints">Endpoints</a></li><li><a href="https://github.com/DjDeveloperr/Manga">GitHub</a></li></ul><h3>Popular Manga</h3><ul>${
           home.popular.map((manga) =>
             `<li><a href="/manga/${manga.id}">${manga.name}</a> (<a href="${manga.thumbnail}">Img</a>)</li>`
           ).join("")
@@ -71,10 +72,10 @@ serve({
   "/manga/:id": (_, __, p) =>
     scrapeManga(p!.id).then((manga) =>
       html(
-        `Manga - ${manga.title}`,
+        `${manga.title} | Manga Reader`,
         `
+<img src="${manga.thumbnail}" alt="${manga.title}" />
 <h3>${manga.title}</h3>
-Thumbnail: <a href="${manga.thumbnail}">Link</a>
 <p>${manga.description}</p>
 <ul>
   <li>Authors: ${manga.authors}</li>
@@ -142,7 +143,7 @@ ${
           },
         },
         {
-          name: "Get Manga info (including chapters)",
+          name: "Get Manga Info & Chapters",
           path: "/api/manga",
           params: {
             id: "Manga ID",

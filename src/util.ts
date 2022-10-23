@@ -17,6 +17,7 @@ export async function scrapeFetch(path: string, options: RequestInit = {}) {
 export async function scrape(page: string) {
   const res = await scrapeFetch(page);
   const html = await res.text();
+  if (html.includes("404 - PAGE NOT FOUND")) throw new Error("404");
   return cheerio.load(html);
 }
 
