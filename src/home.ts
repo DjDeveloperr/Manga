@@ -8,14 +8,15 @@ export async function scrapeHome(): Promise<Home> {
   let sel = $(".owl-carousel > .item");
   sel.each((_, e) => {
     if (e.type !== "tag") return;
-    const img = e.children.filter((e) => e.type === "tag")[0];
-    const urlCont = e.children.filter((e) => e.type === "tag")[1];
+    const echildren = e.children.filter((e) => e.type === "tag");
+    const [img, urlCont] = echildren;
     if (urlCont?.type !== "tag" || img?.type !== "tag") {
       return;
     }
 
-    const urlCont2 = urlCont.children.filter((e) => e.type === "tag")[0];
-    const urlCont3 = urlCont.children.filter((e) => e.type === "tag")[1];
+    const [urlCont2, urlCont3] = urlCont.children.filter((e) =>
+      e.type === "tag"
+    );
     if (urlCont2?.type !== "tag" || urlCont3?.type !== "tag") {
       return;
     }
@@ -36,8 +37,7 @@ export async function scrapeHome(): Promise<Home> {
   sel = $(".content-homepage-item");
   sel.each((_, e) => {
     if (e.type !== "tag") return;
-    const link = e.children.filter((e) => e.type === "tag")[0];
-    const info = e.children.filter((e) => e.type === "tag")[1];
+    const [link, info] = e.children.filter((e) => e.type === "tag");
 
     if (link?.type !== "tag" || info?.type !== "tag") return;
     const img = link.children.filter((e) => e.type === "tag")[0];
