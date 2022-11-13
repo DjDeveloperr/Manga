@@ -119,3 +119,47 @@ body {
     border-radius: 5px;
     background-color: rgba(30, 30, 30, 0.5);
 }
+
+.manga-header {
+    display: flex;
+    align-items: flex-start;
+    margin: 20px;
+}
+
+.manga-thumbnail {
+    width: 180px;
+    height: 270px;
+    margin-right: 20px;
+    border-radius: 6px;
+}
+
+.manga-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.manga-info-title {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+
+.manga-info-field {
+    font-size: 17px;
+}
+
+.manga-description {
+    margin: 14px;
+    font-size: 16px;
+}
+
+.page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}

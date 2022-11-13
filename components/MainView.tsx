@@ -1,14 +1,14 @@
 import { Head } from "$fresh/runtime.ts";
 
 export function MainView(
-  { children, title }: { children: any, title: string }
+  { children, title, hiddenTitle }: { children: any, title: string, hiddenTitle?: boolean }
 ) {
   return (
     <div class="main-view scrollbar">
       <Head>
         <title>{title} - Manga Reader</title>
       </Head>
-      <h1 class="main-view-title">{title}</h1>
+      {!hiddenTitle && <h1 class="main-view-title">{title}</h1>}
       {children}
       <div class="navigation-spacer"></div>
     </div>

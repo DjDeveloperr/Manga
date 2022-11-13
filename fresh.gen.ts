@@ -13,8 +13,7 @@ import * as $6 from "./routes/index.tsx";
 import * as $7 from "./routes/library.tsx";
 import * as $8 from "./routes/manga/[id].tsx";
 import * as $9 from "./routes/manga/[id]/[chapter].tsx";
-import * as $10 from "./routes/manga/[id]/[chapter]/[page].tsx";
-import * as $11 from "./routes/settings.tsx";
+import * as $10 from "./routes/settings.tsx";
 
 const manifest = {
   routes: {
@@ -28,8 +27,7 @@ const manifest = {
     "./routes/library.tsx": $7,
     "./routes/manga/[id].tsx": $8,
     "./routes/manga/[id]/[chapter].tsx": $9,
-    "./routes/manga/[id]/[chapter]/[page].tsx": $10,
-    "./routes/settings.tsx": $11,
+    "./routes/settings.tsx": $10,
   },
   islands: {},
   baseUrl: import.meta.url,
