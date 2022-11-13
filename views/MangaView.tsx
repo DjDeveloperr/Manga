@@ -9,11 +9,10 @@ export function MangaView(
 ) {
   return (
     <App>
-      <MainView title="Manga" hiddenTitle>
+      <MainView title={manga.title}>
         <div class="manga-header">
           <img class="manga-thumbnail" alt={manga.title} src={manga.thumbnail} />
           <div class="manga-info">
-            <h2 class="manga-info-title">{manga.title}</h2>
             <p class="manga-info-field">By {manga.authors}</p>
             <p class="manga-info-field">Alt: {manga.alternative}</p>
             <p class="manga-info-field">Status: {manga.status}</p>
