@@ -11,7 +11,6 @@ export default function App(
         <meta name="theme-color" content="#ffffff" />
         <link rel="icon" href="/favicon.ico" />
         <meta name="charset" content="utf-8" />
-        <title>Manga Reader</title>
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
         <link href="/style.css" rel="stylesheet" />
       </Head>
