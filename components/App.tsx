@@ -8,7 +8,7 @@ export default function App(
     <div class="app">
       <Head>
         <meta name="description" content="Manga Reader" />
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#000000" />
         <link rel="icon" href="/favicon.ico" />
         <meta name="charset" content="utf-8" />
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
