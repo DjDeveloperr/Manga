@@ -9,5 +9,5 @@ export const handler: Handlers<any[]> = {
 };
 
 export default function Browse({ data }: PageProps<any[]>) {
-  return <BrowseView result={data} />;
+  return <BrowseView results={data} />;
 }
