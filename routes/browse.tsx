@@ -1,6 +1,13 @@
 import { BrowseView } from "../views/BrowseView.tsx";
 import { search } from "../src/search.ts";
 
-export default function Browse(result?: any[]) {
-  return <BrowseView result={result} />;
+export const handler: Handlers<any[]> = {
+  async GET(req, ctx) {
+    const resp = await search(new URL(req.url).searchParams?.get("?") ?? "");
+    return ctx.render(resp);
+  },
+};
+
+export default function Browse({ data }: PageProps<any[]>) {
+  return <BrowseView result={data} />;
 }
