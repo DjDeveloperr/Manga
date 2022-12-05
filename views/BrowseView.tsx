@@ -6,7 +6,7 @@ export function BrowseView(results?: any[]) {
   return (
     <App>
       <MainView title="Browse">
-        <form action="/browse" method="get" style="padding: 4px">
+        <form action="/browse" method="get">
             <input name="q" placeholder="Query..." id="name" type="text" />
             <input type="submit" value="Search" />
         </form>
