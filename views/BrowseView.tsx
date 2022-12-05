@@ -5,7 +5,10 @@ export function BrowseView() {
   return (
     <App>
       <MainView title="Browse">
-
+        <form>
+            <input name="q" placeholder="Query..." id="name" type="text" />
+            <input type="submit" value="Search" />
+        </form>
       </MainView>
     </App>
   )
