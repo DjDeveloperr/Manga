@@ -5,8 +5,7 @@ export function LibraryView() {
   return (
     <App>
       <MainView title="Library">
-
       </MainView>
     </App>
-  )
+  );
 }

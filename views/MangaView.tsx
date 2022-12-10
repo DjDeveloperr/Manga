@@ -11,7 +11,11 @@ export function MangaView(
     <App>
       <MainView title={manga.title}>
         <div class="manga-header">
-          <img class="manga-thumbnail" alt={manga.title} src={manga.thumbnail} />
+          <img
+            class="manga-thumbnail"
+            alt={manga.title}
+            src={manga.thumbnail}
+          />
           <div class="manga-info">
             <p class="manga-info-field">By {manga.authors}</p>
             <p class="manga-info-field">Alt: {manga.alternative}</p>
@@ -25,20 +29,34 @@ export function MangaView(
           <p class="manga-description">{manga.description}</p>
         </MainViewBlock>
         <MainViewBlock title="Chapters" id="chapters">
-          <table class="chapters">
+          <table class="chapters" style="whitespace: no-wrap;">
             <thead>
               <tr>
-                <th class="chapter-title">Title</th>
-                <th class="chapter-views">Views</th>
-                <th class="chapter-date">Date</th>
+                <th class="chapter-title" style="text-align: left">Title</th>
+                <th class="chapter-views" style="text-align: right">Views</th>
+                <th class="chapter-date" style="text-align: right">Date</th>
               </tr>
             </thead>
             <tbody>
               {manga.chapters.map((chapter) => (
                 <tr>
-                  <td class="chapter-title"><Link href={`/manga/${manga.id}/${chapter.id}`}>{chapter.title}</Link></td>
-                  <td class="chapter-views">{chapter.views}</td>
-                  <td class="chapter-date">{chapter.uploaded}</td>
+                  <td class="chapter-title" style="text-align: left">
+                    <Link href={`/manga/${manga.id}/${chapter.id}`}>
+                      {chapter.title}
+                    </Link>
+                  </td>
+                  <td
+                    class="chapter-views"
+                    style="text-align: right; width: auto"
+                  >
+                    {chapter.views}
+                  </td>
+                  <td
+                    class="chapter-date"
+                    style="text-align: right; width: auto"
+                  >
+                    {chapter.uploaded}
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -46,5 +64,5 @@ export function MangaView(
         </MainViewBlock>
       </MainView>
     </App>
-  )
+  );
 }

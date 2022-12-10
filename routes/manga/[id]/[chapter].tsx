@@ -11,7 +11,5 @@ export const handler: Handlers<ChapterPage[]> = {
 };
 
 export default function Manga(props: PageProps<ChapterPage[]>) {
-  return (
-    <ChapterView chapter={props.data} />
-  );
+  return <ChapterView chapter={props.data} />;
 }

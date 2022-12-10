@@ -10,7 +10,19 @@ export async function search(query: string): Promise<SearchResult[]> {
     body: new URLSearchParams({
       searchword: query,
     }).toString(),
-  }).then((e) => e.json());
+  }).then((e) => {
+    if (!e.ok) console.log(e.statusText, e.status);
+    return e.text();
+  }).then((text) => {
+    try {
+      return JSON.parse(text);
+    } catch (e) {
+      throw new Error(
+        `Failed to parse search result: "${text}" (${text.length})`,
+        { cause: e },
+      );
+    }
+  });
 
   return data.searchlist.map((e: any) => ({
     id: e.url_story.split("/").pop()!,

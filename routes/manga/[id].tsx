@@ -11,7 +11,5 @@ export const handler: Handlers<ApiManga> = {
 };
 
 export default function Manga(props: PageProps<ApiManga>) {
-  return (
-    <MangaView manga={props.data} />
-  );
+  return <MangaView manga={props.data} />;
 }

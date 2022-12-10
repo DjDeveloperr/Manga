@@ -5,37 +5,36 @@ import { HScroll } from "../components/HScroll.tsx";
 import { Link } from "../components/Link.tsx";
 import { MainView } from "../components/MainView.tsx";
 import { MainViewBlock } from "../components/MainViewBlock.tsx";
-import { PopularMangaCard } from "../components/MangaCard.tsx";
+import { MangaCard } from "../components/MangaCard.tsx";
 
 export function HomeView(
-  { home }: { home: Home }
+  { home }: { home: Home },
 ) {
   return (
     <App>
       <MainView title="Home">
         <MainViewBlock id="popular" title="Popular">
           <HScroll>
-            {home.popular.map((manga) => (
-              <PopularMangaCard manga={manga} />
-            ))}
+            {home.popular.map((manga) => <MangaCard manga={manga} />)}
           </HScroll>
         </MainViewBlock>
         <MainViewBlock id="recent" title="Recent">
           <HScroll>
-            {home.recent.map((manga) => (
-              <PopularMangaCard manga={manga} />
-            ))}
+            {home.recent.map((manga) => <MangaCard manga={manga} />)}
           </HScroll>
         </MainViewBlock>
         <MainViewBlock id="genres" title="Browse by Genre">
-          {Object.keys(Genre).filter(e => typeof Genre[e as keyof typeof Genre] === "number").map(
+          {Object.keys(Genre).filter((e) =>
+            typeof Genre[e as keyof typeof Genre] === "number"
+          ).map(
             (genre) => (
-              <Link href={`/browse/${genre}`}>
+              <Link href={`/browse?included=${genre}`}>
                 <div class="genre">{genre}</div>
               </Link>
-            ))}
+            ),
+          )}
         </MainViewBlock>
       </MainView>
     </App>
-  )
+  );
 }

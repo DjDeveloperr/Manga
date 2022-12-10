@@ -8,10 +8,10 @@ export function ChapterView(
   return (
     <App>
       <MainView title="Manga Reader" hiddenTitle>
-        {chapter.map(page => (
+        {chapter.map((page) => (
           <img class="page" alt={page.title} src={page.proxyURL} />
         ))}
       </MainView>
     </App>
-  )
+  );
 }

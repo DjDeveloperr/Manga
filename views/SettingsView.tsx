@@ -5,8 +5,7 @@ export function SettingsView() {
   return (
     <App>
       <MainView title="Settings">
-
       </MainView>
     </App>
-  )
+  );
 }

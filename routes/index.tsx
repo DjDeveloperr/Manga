@@ -1,5 +1,5 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
-import { scrapeHome, Home as MangaHome } from "../src/mod.ts";
+import { Home as MangaHome, scrapeHome } from "../src/mod.ts";
 import { HomeView } from "../views/HomeView.tsx";
 
 export const handler: Handlers<MangaHome> = {

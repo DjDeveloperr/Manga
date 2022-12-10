@@ -7,6 +7,7 @@ export async function scrapeFetch(path: string, options: RequestInit = {}) {
     Object.assign(options, {
       headers: Object.assign(options.headers ?? {}, {
         "user-agent": USER_AGENT,
+        "origin": BASE_URL,
       }),
     }),
   );

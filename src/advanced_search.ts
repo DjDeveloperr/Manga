@@ -77,7 +77,16 @@ export interface AdvancedSearchOptions {
   page?: number;
 }
 
-export async function advancedSearch(options: AdvancedSearchOptions = {}) {
+export interface AdvancedSearchData {
+  pages: number;
+  page: number;
+  results: AdvancedSearchResult[];
+  total: number;
+}
+
+export async function advancedSearch(
+  options: AdvancedSearchOptions = {},
+): Promise<AdvancedSearchData> {
   const params = new URLSearchParams({
     s: "all",
     page: (options.page ?? 1).toString(),
@@ -154,6 +163,7 @@ export async function advancedSearch(options: AdvancedSearchOptions = {}) {
   );
 
   const results: AdvancedSearchResult[] = [];
+  let pages = 1;
 
   $(".content-genres-item").each((_, e) => {
     const tags = e.childNodes.filter((e) => e.type === "tag");
@@ -182,13 +192,15 @@ export async function advancedSearch(options: AdvancedSearchOptions = {}) {
     result.id = url.split("/").pop()!;
     result.title = (rt.firstChild as any).firstChild.data.trim();
     result.description = (rd.firstChild as any).data.trim();
-    result.views = (rpv.firstChild as any).data.trim();
-    result.lastUpdated = (rpd.firstChild as any).data.trim();
-    result.author = rpa.firstChild
+    result.views = rpv.firstChild ? (rpv.firstChild as any).data.trim() : "0";
+    result.lastUpdated = rpd?.firstChild
+      ? (rpd.firstChild as any).data.trim()
+      : "Unknown";
+    result.author = rpa?.firstChild
       ? (rpa.firstChild as any).data.trim()
       : "Updating";
     result.latestChapter = {
-      id: (ra.attribs.href as string).split("/").pop()!,
+      id: (ra.attribs.href as string)?.split("/").pop()!,
       title: (ra.firstChild as any).data,
     };
     result.thumbnail = li.attribs.src;
@@ -200,5 +212,20 @@ export async function advancedSearch(options: AdvancedSearchOptions = {}) {
     results.push(result);
   });
 
-  return results;
+  const pg = $("div.panel-page-number > div.group-page > a.page-blue.page-last")
+    .text();
+
+  if (pg && pg.startsWith("LAST")) {
+    pages = parseInt(pg.split("(")[1].split(")")[0]);
+  }
+
+  let total = results.length;
+
+  const t = $("div.panel-page-number > div.group-qty > a").text();
+
+  if (t && t.startsWith("TOTAL : ")) {
+    total = parseInt(t.split(" : ")[1].replaceAll(",", ""));
+  }
+
+  return { results, pages, page: options.page ?? 1, total };
 }

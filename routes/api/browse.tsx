@@ -6,6 +6,8 @@ export const handler: Handlers = {
     return Response.json(await advancedSearch({}));
   },
   async POST(req, _ctx) {
-    return Response.json(await advancedSearch(req.body ? await req.json() : {}));
+    return Response.json(
+      await advancedSearch(req.body ? await req.json() : {}),
+    );
   },
 };

@@ -1,7 +1,11 @@
 import { Head } from "$fresh/runtime.ts";
 
 export function MainView(
-  { children, title, hiddenTitle }: { children: any, title: string, hiddenTitle?: boolean }
+  { children, title, hiddenTitle }: {
+    children: any;
+    title: string;
+    hiddenTitle?: boolean;
+  },
 ) {
   return (
     <div class="main-view scrollbar">
@@ -12,5 +16,5 @@ export function MainView(
       {children}
       <div class="navigation-spacer"></div>
     </div>
-  )
+  );
 }

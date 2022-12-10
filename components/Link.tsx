@@ -1,7 +1,9 @@
 export function Link(
-  { children, href, extendClass }: { children: any, href: string, extendClass?: string }
+  { children, href, extendClass }: {
+    children: any;
+    href: string;
+    extendClass?: string;
+  },
 ) {
-  return (
-    <a href={href} class={`link ${extendClass}`}>{children}</a>
-  )
+  return <a href={href} class={`${extendClass} link`}>{children}</a>;
 }

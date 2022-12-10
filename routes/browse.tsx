@@ -1,13 +1,51 @@
+import { Handlers, PageProps } from "$fresh/server.ts";
 import { BrowseView } from "../views/BrowseView.tsx";
-import { search } from "../src/search.ts";
+import {
+  advancedSearch,
+  AdvancedSearchData,
+  AdvancedSearchOptions,
+  Genre,
+  Keywords,
+  OrderBy,
+  Status,
+} from "../src/advanced_search.ts";
 
-export const handler: Handlers<any[]> = {
+export type ExtendedData = AdvancedSearchData & {
+  url: URL;
+};
+
+export const handler: Handlers<ExtendedData> = {
   async GET(req, ctx) {
-    const resp = await search(new URL(req.url).searchParams?.get("?") ?? "");
-    return ctx.render(resp);
+    const url = new URL(req.url);
+    const params = url.searchParams ?? new URLSearchParams();
+    const options: AdvancedSearchOptions = {
+      query: params.has("q")
+        ? params.get("q")!.split("").map((e) => {
+          if (e === " ") return "_";
+          else if (e.match(/[a-z0-9A-Z]/)) return e;
+          else return "";
+        }).join("")
+        : undefined,
+      keyword: Keywords.Everything,
+      page: parseInt(params.get("page") ?? "1"),
+      status: params.has("status")
+        ? Status[params.get("status")! as keyof typeof Status]
+        : undefined,
+      orderBy: params.has("order_by")
+        ? OrderBy[params.get("order_by")! as keyof typeof OrderBy]
+        : undefined,
+      included: (params.get("included")?.split(",") ?? []).map((e) =>
+        Genre[e as keyof typeof Genre]
+      ).filter((e) => e !== undefined) as Genre[],
+      excluded: (params.get("excluded")?.split(",") ?? []).map((e) =>
+        Genre[e as keyof typeof Genre]
+      ).filter((e) => e !== undefined) as Genre[],
+    };
+    const resp = await advancedSearch(options);
+    return ctx.render({ url, ...resp });
   },
 };
 
-export default function Browse({ data }: PageProps<any[]>) {
-  return <BrowseView results={data} />;
+export default function Browse({ data }: PageProps<ExtendedData>) {
+  return <BrowseView data={data} />;
 }
