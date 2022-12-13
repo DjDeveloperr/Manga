@@ -1,0 +1,17 @@
+{
+  "name": "Manga Reader",
+  "short_name": "Manga",
+  "theme_color": "#ffffff",
+  "background_color": "#000000",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "https://manga.deno.dev/",
+  "description": "Manga Reader Client",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://manga.deno.dev/favicon.ico",
+      "sizes": "64x64"
+    }
+  ]
+}

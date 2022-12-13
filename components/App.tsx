@@ -10,6 +10,7 @@ export default function App(
         <meta name="description" content="Manga Reader" />
         <meta name="theme-color" content="#000000" />
         <link rel="icon" href="/favicon.ico" />
+        <link rel="manifest" href="/manifest.json" />
         <meta name="charset" content="utf-8" />
         <link
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
