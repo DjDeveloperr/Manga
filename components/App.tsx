@@ -2,7 +2,7 @@ import { Head } from "$fresh/runtime.ts";
 import { Navigation } from "./Navigation.tsx";
 
 export default function App(
-  { children }: { children: any },
+  { children, active }: { children: any; active?: string },
 ) {
   return (
     <div class="app">
@@ -18,7 +18,7 @@ export default function App(
         <link href="/style.css" rel="stylesheet" />
       </Head>
       {children}
-      <Navigation />
+      <Navigation active={active} />
     </div>
   );
 }

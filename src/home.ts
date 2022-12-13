@@ -1,7 +1,7 @@
 import { Home, PopularManga, RecentManga } from "./types.ts";
 import { scrape } from "./util.ts";
 
-export async function scrapeHome(): Promise<Home> {
+export async function fetchHome(): Promise<Home> {
   const $ = await scrape("/");
 
   const popular: PopularManga[] = [];

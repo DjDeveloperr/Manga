@@ -1,9 +1,9 @@
 import { Handlers } from "$fresh/server.ts";
-import { scrapeHome } from "../../src/home.ts";
+import { fetchHome } from "../../src/home.ts";
 
 export const handler: Handlers = {
   async GET(_, _ctx) {
-    const resp = await scrapeHome();
+    const resp = await fetchHome();
     return Response.json(resp);
   },
 };

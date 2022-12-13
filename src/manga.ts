@@ -2,7 +2,7 @@ import { Manga, READ_BASE_URL } from "./types.ts";
 import { assertTag, scrape } from "./util.ts";
 import { cheerio } from "../deps.ts";
 
-export async function scrapeManga(id: string): Promise<Manga> {
+export async function fetchManga(id: string): Promise<Manga> {
   const $ = await scrape(READ_BASE_URL + "/" + id);
 
   const manga: Manga = {

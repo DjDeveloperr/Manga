@@ -1,5 +1,5 @@
 import { Handlers } from "$fresh/server.ts";
-import { scrapeChapter } from "../../src/chapter.ts";
+import { fetchChapter } from "../../src/chapter.ts";
 
 export const handler: Handlers = {
   async GET(req, _ctx) {
@@ -12,7 +12,7 @@ export const handler: Handlers = {
     if (!chapter) {
       return Response.json({ error: "Missing chapter" }, { status: 400 });
     }
-    const resp = await scrapeChapter(id, chapter);
+    const resp = await fetchChapter(id, chapter);
     return Response.json(resp);
   },
 };

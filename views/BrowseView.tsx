@@ -14,7 +14,7 @@ export function BrowseView({ data }: { data: ExtendedData }) {
   const pagecap = (num: number) => Math.min(Math.max(num, 1), data.pages);
   data.page = pagecap(data.page);
   return (
-    <App>
+    <App active="Browse">
       <MainView title="Browse">
         <form class="browse-input" action="/browse" method="get">
           <input

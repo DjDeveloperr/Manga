@@ -1,5 +1,5 @@
 import { Handlers } from "$fresh/server.ts";
-import { scrapeManga } from "../../src/manga.ts";
+import { fetchManga } from "../../src/manga.ts";
 
 export const handler: Handlers = {
   async GET(req, _ctx) {
@@ -8,7 +8,7 @@ export const handler: Handlers = {
     if (!id) {
       return Response.json({ error: "Missing id" }, { status: 400 });
     }
-    const resp = await scrapeManga(id);
+    const resp = await fetchManga(id);
     return Response.json(resp);
   },
 };

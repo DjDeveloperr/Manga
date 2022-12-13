@@ -1,7 +1,7 @@
 import { ChapterPage, READ_BASE_URL } from "./types.ts";
 import { scrape } from "./util.ts";
 
-export async function scrapeChapter(
+export async function fetchChapter(
   id: string,
   chapter: string,
 ): Promise<ChapterPage[]> {

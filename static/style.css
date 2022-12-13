@@ -1,5 +1,6 @@
 :root {
     --navigation-height: 50px;
+    --navigation-width-desktop: 60px;
     color-scheme: dark;
 }
 
@@ -48,10 +49,20 @@ body {
     transition: background-color 0.2s;
 }
 
+.navigation-item:hover > .navigation-icon {
+    color: white
+}
+
 .navigation-icon {
     font-size: 34px;
-    color: white;
+    color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
+    transition: color 0.2s;
+    font-weight: lighter;
+}
+
+.navigation-item, .active > .navigation-icon {
+    color: white;
 }
 
 .navigation-spacer {
@@ -124,8 +135,8 @@ body {
     position: absolute;
 }
 
-.manga-card:hover { 
-    transform: scale(1.1); 
+.manga-card:hover, .manga-card:active, .manga-card:focus {
+    transform: scale(1.088);
     z-index: 5;
 }
 
@@ -139,12 +150,16 @@ body {
     background-image: linear-gradient(to right, black, rgba(0, 0, 0, 0.5));
     overflow: hidden;
     white-space: nowrap;
-    /* Don't forget this one */
     text-overflow: ellipsis;
 }
 
 .link {
     color: white;
+    text-decoration: none;
+}
+
+.styled-link {
+    color: #00bfff;
     text-decoration: none;
 }
 
@@ -218,12 +233,31 @@ body {
         flex-direction: column;
         align-items: center;
     }
+
     .manga-info {
         margin-top: 20px;
     }
+
     .manga-card-grid {
         grid-gap: 4px;
         margin: 4px;
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    .navigation {
+        width: var(--navigation-height);
+        height: 100%;
+        flex-direction: column;
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .main-view {
+        margin-left: var(--navigation-height);
+    }
+
+    .navigation-spacer {
+        height: 0;
     }
 }
 
@@ -238,4 +272,22 @@ body {
     margin: 10px;
     font-size: 18px;
     padding: 3px;
+}
+
+::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+}
+  
+::-webkit-scrollbar-track {
+    background: black;
+}
+  
+::-webkit-scrollbar-thumb {
+    border-radius: 14px;
+    background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
