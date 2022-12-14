@@ -1,17 +1,21 @@
 {
   "name": "Manga Reader",
-  "short_name": "Manga",
-  "theme_color": "#ffffff",
-  "background_color": "#000000",
-  "display": "standalone",
+  "short_name": "Manga Reader",
+  "theme_color": "#000000",
+  "background_color": "#ffffff",
+  "display": "fullscreen",
   "scope": "/",
-  "start_url": "https://manga.deno.dev/",
-  "description": "Manga Reader Client",
+  "start_url": "/?fullscreen=1",
+  "description": "Simple and intuitive manga reader.",
   "orientation": "portrait",
   "icons": [
     {
-      "src": "https://manga.deno.dev/favicon.ico",
-      "sizes": "64x64"
+      "src": "/icon.png",
+      "sizes": "1024x1024"
+    },
+    {
+      "src": "/splash_screen/icon.png",
+      "sizes": "512x512"
     }
   ]
 }
