@@ -1,6 +1,6 @@
 :root {
     --navigation-height: 50px;
-    --navigation-title: 60px;
+    --navigation-title: 70px;
     --navigation-width-desktop: 60px;
     --backdrop-color: rgba(46, 46, 46, 0.43);
     --backdrop-blur: 8px;
@@ -58,13 +58,15 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background-color 0.2s;
     z-index: 100;
 }
 
 .navigation-title-text {
     font-size: 24px;
     font-weight: lighter;
+    color: white;
+    text-decoration: none;
+    text-align: center;
 }
 
 .navigation-item {
@@ -303,11 +305,7 @@ body {
         padding-bottom: var(--nav-pad);
     }
 
-    html:not([data-scroll='0']) .navigation-title {
-        display: none;
-    }
-
-    html:not([data-scroll='0']) .navigation-title {
+    .navigation-title {
         display: block;
     }
 
