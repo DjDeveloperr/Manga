@@ -62,8 +62,8 @@ body {
 }
 
 .navigation-title-text {
-    font-size: 24px;
-    font-weight: light;
+    font-size: 20px;
+    font-weight: 900;
     color: white;
     text-decoration: none;
     text-align: center;
@@ -98,13 +98,13 @@ body {
 .navigation-spacer {
     margin: 0;
     padding: 0;
-    height: var(--navigation-height);
 }
 
 .navigation-title-spacer {
+    display: none;
     margin: 0;
     padding: 0;
-    height: 0;
+    height: calc(var(--navigation-height) + 10px);;
 }
 
 .main-view {
@@ -311,7 +311,7 @@ body {
     }
 
     .navigation-title-spacer {
-        height: var(--navigation-height);
+        display: block;
     }
 }
 
