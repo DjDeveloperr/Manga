@@ -9,6 +9,7 @@ export function MainView(
 ) {
   return (
     <>
+      <div class="notch"></div>
       <div class="main-view">
         <Head>
           <title>{title} - Manga Reader</title>

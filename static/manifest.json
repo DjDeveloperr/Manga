@@ -3,7 +3,7 @@
   "short_name": "Manga Reader",
   "theme_color": "#000000",
   "background_color": "#ffffff",
-  "display": "fullscreen",
+  "display": "standalone",
   "scope": "/",
   "start_url": "/?fullscreen=1",
   "description": "Simple and intuitive manga reader.",

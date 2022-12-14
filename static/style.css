@@ -1,6 +1,5 @@
 :root {
     --navigation-height: 50px;
-    --navigation-title: 80px;
     --navigation-width-desktop: 60px;
     --backdrop-color: rgba(46, 46, 46, 0.43);
     --backdrop-blur: 8px;
@@ -77,6 +76,7 @@ body {
 
 .main-view {
     margin: 0;
+    margin-top: 10px;
     padding: 20px;
 }
 
@@ -273,9 +273,32 @@ body {
         height: calc(var(--navigation-height) + var(--nav-pad));
         padding-bottom: var(--nav-pad);
     }
+}
+
+.notch {
+    display: none;
+}
+
+@media (display-mode: standalone) and (max-width: 600px) {
+    :root {
+        --notch: 60px;
+    }
+    
+    .notch {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: var(--notch);
+        background-color: var(--backdrop-color);
+        backdrop-filter: var(--backdrop-blur);
+        -webkit-backdrop-filter: blur(var(--backdrop-blur));
+        z-index: 100;
+    }
 
     .main-view {
-        margin-top: var(--navigation-title);
+        margin-top: var(--notch);
     }
 }
 
