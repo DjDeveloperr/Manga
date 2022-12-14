@@ -1,6 +1,6 @@
 :root {
     --navigation-height: 50px;
-    --navigation-title: 70px;
+    --navigation-title: 80px;
     --navigation-width-desktop: 60px;
     --backdrop-color: rgba(46, 46, 46, 0.43);
     --backdrop-blur: 8px;
@@ -63,10 +63,11 @@ body {
 
 .navigation-title-text {
     font-size: 24px;
-    font-weight: lighter;
+    font-weight: light;
     color: white;
     text-decoration: none;
     text-align: center;
+    padding-top: 30px;
 }
 
 .navigation-item {
