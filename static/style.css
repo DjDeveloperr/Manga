@@ -267,22 +267,13 @@ body {
     }
 }
 
-@media all and (display-mode: fullscreen) and (max-width: 600px) {
-    .navigation {
-        width: 100%;
-        --nav-pad: 16px;
-        height: calc(var(--navigation-height) + var(--nav-pad));
-        padding-bottom: var(--nav-pad);
-    }
-}
-
 .notch {
     display: none;
 }
 
 @media (display-mode: standalone) and (max-width: 600px) {
     :root {
-        --notch: 40px;
+        --notch: 50px;
     }
 
     .notch {
@@ -300,6 +291,13 @@ body {
 
     .main-view {
         margin-top: var(--notch);
+    }
+
+    .navigation {
+        width: 100%;
+        --nav-pad: 16px;
+        height: calc(var(--navigation-height) + var(--nav-pad));
+        padding-bottom: var(--nav-pad);
     }
 }
 
