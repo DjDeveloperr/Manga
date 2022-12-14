@@ -45,32 +45,6 @@ body {
     z-index: 100;
 }
 
-.navigation-title {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: var(--navigation-title);
-    background-color: var(--backdrop-color);
-    backdrop-filter: var(--backdrop-blur);
-    -webkit-backdrop-filter: blur(var(--backdrop-blur));
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    justify-content: center;
-    z-index: 100;
-}
-
-.navigation-title-text {
-    font-size: 20px;
-    font-weight: 900;
-    color: white;
-    text-decoration: none;
-    text-align: center;
-    padding: 10px;
-}
-
 .navigation-item {
     display: flex;
     align-items: center;
@@ -298,10 +272,6 @@ body {
         --nav-pad: 16px;
         height: calc(var(--navigation-height) + var(--nav-pad));
         padding-bottom: var(--nav-pad);
-    }
-
-    .navigation-title {
-        display: block;
     }
 
     .main-view {

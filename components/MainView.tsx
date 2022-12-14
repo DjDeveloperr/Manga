@@ -9,9 +9,6 @@ export function MainView(
 ) {
   return (
     <>
-      <div class="navigation-title">
-        <span class="navigation-title-text">{title}</span>
-      </div>
       <div class="main-view">
         <Head>
           <title>{title} - Manga Reader</title>
