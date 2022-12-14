@@ -1,7 +1,7 @@
 :root {
     --navigation-height: 50px;
     --navigation-width-desktop: 60px;
-    --backdrop-color: rgba(46, 46, 46, 0.43);
+    --backdrop-color: rgba(44, 44, 44, 0.44);
     --backdrop-blur: 8px;
     color-scheme: dark;
 }
@@ -291,6 +291,7 @@ body {
 
     .main-view {
         margin-top: var(--notch);
+        margin-bottom: calc(var(--navigation-height) + var(--nav-pad));
     }
 
     .navigation {
