@@ -271,6 +271,12 @@ body {
     display: none;
 }
 
+.spacer {
+    display: block;
+    width: 100%;
+    height: var(--navigation-height);
+}
+
 @media (display-mode: standalone) and (max-width: 600px) {
     :root {
         --notch: 50px;
@@ -299,6 +305,10 @@ body {
         --nav-pad: 16px;
         height: calc(var(--navigation-height) + var(--nav-pad));
         padding-bottom: var(--nav-pad);
+    }
+
+    .spacer {
+        height: calc(var(--navigation-height) + var(--nav-pad));
     }
 }
 

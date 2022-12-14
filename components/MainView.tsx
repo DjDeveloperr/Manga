@@ -15,6 +15,7 @@ export function MainView(
         </Head>
         {!hiddenTitle && <h1 class="main-view-title">{title}</h1>}
         {children}
+        <div class="spacer"></div>
       </div>
     </>
   );
