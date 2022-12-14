@@ -1,8 +1,8 @@
 :root {
     --navigation-height: 50px;
-    --navigation-title: 50px;
+    --navigation-title: 60px;
     --navigation-width-desktop: 60px;
-    --backdrop-color: rgba(0, 0, 0, 0.43);
+    --backdrop-color: rgba(46, 46, 46, 0.43);
     --backdrop-blur: 8px;
     color-scheme: dark;
 }
@@ -59,6 +59,7 @@ body {
     align-items: center;
     justify-content: center;
     transition: background-color 0.2s;
+    z-index: 100;
 }
 
 .navigation-title-text {
@@ -297,17 +298,17 @@ body {
 @media all and (display-mode: fullscreen) and (max-width: 600px) {
     .navigation {
         width: 100%;
-        --nav-pad: 14px;
+        --nav-pad: 16px;
         height: calc(var(--navigation-height) + var(--nav-pad));
         padding-bottom: var(--nav-pad);
     }
 
-    .navigation-title {
-        display: block;
+    html:not([data-scroll='0']) .navigation-title {
+        display: none;
     }
 
     html:not([data-scroll='0']) .navigation-title {
-        position: fixed;
+        display: block;
     }
 
     .navigation-title-spacer {
