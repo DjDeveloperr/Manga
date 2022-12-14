@@ -33,7 +33,7 @@ body {
     --border-w: 1px;
     height: calc(var(--navigation-height) - var(--border-w));
     border-top: var(--border-w) solid rgba(255, 255, 255, 0.1);
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.43);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     display: flex;
@@ -267,7 +267,7 @@ body {
 @media all and (display-mode: fullscreen) and (max-width: 600px) {
     .navigation {
         width: 100%;
-        --nav-pad: 10px;
+        --nav-pad: 14px;
         height: calc(var(--navigation-height) + var(--nav-pad));
         padding-bottom: var(--nav-pad);
     }

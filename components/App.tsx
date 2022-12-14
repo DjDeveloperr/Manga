@@ -23,6 +23,10 @@ export default function App(
           name="apple-mobile-web-app-status-bar-style"
           content="black-translucent"
         />
+        <meta
+          name="viewport"
+          content="width=device-width; initial-scale=1; viewport-fit=cover"
+        />
         <link
           rel="apple-touch-startup-image"
           media="screen and (device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"
