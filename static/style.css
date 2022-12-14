@@ -1,6 +1,9 @@
 :root {
     --navigation-height: 50px;
+    --navigation-title: 50px;
     --navigation-width-desktop: 60px;
+    --backdrop-color: rgba(0, 0, 0, 0.43);
+    --backdrop-blur: 8px;
     color-scheme: dark;
 }
 
@@ -33,13 +36,34 @@ body {
     --border-w: 1px;
     height: calc(var(--navigation-height) - var(--border-w));
     border-top: var(--border-w) solid rgba(255, 255, 255, 0.1);
-    background-color: rgba(0, 0, 0, 0.43);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
+    background-color: var(--backdrop-color);
+    backdrop-filter: var(--backdrop-blur);
+    -webkit-backdrop-filter: blur(var(--backdrop-blur));
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 100;
+}
+
+.navigation-title {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--navigation-title);
+    background-color: var(--backdrop-color);
+    backdrop-filter: var(--backdrop-blur);
+    -webkit-backdrop-filter: blur(var(--backdrop-blur));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+.navigation-title-text {
+    font-size: 24px;
+    font-weight: lighter;
 }
 
 .navigation-item {
@@ -71,6 +95,12 @@ body {
     margin: 0;
     padding: 0;
     height: var(--navigation-height);
+}
+
+.navigation-title-spacer {
+    margin: 0;
+    padding: 0;
+    height: 0;
 }
 
 .main-view {
@@ -270,6 +300,18 @@ body {
         --nav-pad: 14px;
         height: calc(var(--navigation-height) + var(--nav-pad));
         padding-bottom: var(--nav-pad);
+    }
+
+    .navigation-title {
+        display: block;
+    }
+
+    html:not([data-scroll='0']) .navigation-title {
+        position: fixed;
+    }
+
+    .navigation-title-spacer {
+        height: var(--navigation-height);
     }
 }
 

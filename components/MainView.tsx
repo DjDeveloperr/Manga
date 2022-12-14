@@ -8,13 +8,19 @@ export function MainView(
   },
 ) {
   return (
-    <div class="main-view scrollbar">
-      <Head>
-        <title>{title} - Manga Reader</title>
-      </Head>
-      {!hiddenTitle && <h1 class="main-view-title">{title}</h1>}
-      {children}
-      <div class="navigation-spacer"></div>
-    </div>
+    <>
+      <div class="navigation-title">
+        <div class="navigation-title-text">{title}</div>
+      </div>
+      <div class="main-view">
+        <div class="navigation-title-spacer"></div>
+        <Head>
+          <title>{title} - Manga Reader</title>
+        </Head>
+        {!hiddenTitle && <h1 class="main-view-title">{title}</h1>}
+        {children}
+        <div class="navigation-spacer"></div>
+      </div>
+    </>
   );
 }
