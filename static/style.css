@@ -56,7 +56,8 @@ body {
     backdrop-filter: var(--backdrop-blur);
     -webkit-backdrop-filter: blur(var(--backdrop-blur));
     display: flex;
-    align-items: center;
+    flex-direction: row;
+    align-items: flex-end;
     justify-content: center;
     z-index: 100;
 }
@@ -67,7 +68,7 @@ body {
     color: white;
     text-decoration: none;
     text-align: center;
-    padding-top: 30px;
+    padding: 10px;
 }
 
 .navigation-item {
@@ -98,13 +99,6 @@ body {
 .navigation-spacer {
     margin: 0;
     padding: 0;
-}
-
-.navigation-title-spacer {
-    display: none;
-    margin: 0;
-    padding: 0;
-    height: calc(var(--navigation-height) + 10px);;
 }
 
 .main-view {
@@ -310,8 +304,8 @@ body {
         display: block;
     }
 
-    .navigation-title-spacer {
-        display: block;
+    .main-view {
+        margin-top: var(--navigation-title);
     }
 }
 

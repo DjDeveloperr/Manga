@@ -10,10 +10,9 @@ export function MainView(
   return (
     <>
       <div class="navigation-title">
-        <div class="navigation-title-text">{title}</div>
+        <span class="navigation-title-text">{title}</span>
       </div>
       <div class="main-view">
-        <div class="navigation-title-spacer"></div>
         <Head>
           <title>{title} - Manga Reader</title>
         </Head>
