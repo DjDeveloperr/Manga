@@ -30,8 +30,10 @@ body {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: var(--navigation-height);
-    background-color: rgba(0, 0, 0, 0.36);
+    --border-w: 1px;
+    height: calc(var(--navigation-height) - var(--border-w));
+    border-top: var(--border-w) solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     display: flex;
@@ -250,6 +252,7 @@ body {
         height: 100%;
         flex-direction: column;
         border-right: 1px solid rgba(255, 255, 255, 0.1);
+        border-top: none;
     }
 
     .main-view {
