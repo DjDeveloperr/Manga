@@ -9,14 +9,12 @@ export function MainView(
 ) {
   return (
     <>
-      <div class="notch"></div>
       <div class="main-view">
         <Head>
           <title>{title} - Manga Reader</title>
         </Head>
         {!hiddenTitle && <h1 class="main-view-title">{title}</h1>}
         {children}
-        <div class="navigation-spacer"></div>
       </div>
     </>
   );

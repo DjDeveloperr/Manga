@@ -198,8 +198,9 @@ export default function App(
           href="splash_screens/8.3__iPad_Mini_portrait.png"
         />
       </Head>
-      {children}
+      <div class="notch"></div>
       <Navigation active={active} />
+      {children}
     </div>
   );
 }

@@ -77,6 +77,7 @@ body {
 .main-view {
     margin: 0;
     margin-top: 10px;
+    margin-bottom: var(--navigation-height);
     padding: 20px;
 }
 
@@ -281,9 +282,9 @@ body {
 
 @media (display-mode: standalone) and (max-width: 600px) {
     :root {
-        --notch: 60px;
+        --notch: 40px;
     }
-    
+
     .notch {
         display: block;
         position: fixed;
