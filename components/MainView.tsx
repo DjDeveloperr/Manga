@@ -13,9 +13,8 @@ export function MainView(
         <Head>
           <title>{title} - Manga Reader</title>
         </Head>
-        {!hiddenTitle && <h1 class="main-view-title">{title}</h1>}
+        {!hiddenTitle && <h1 class="main-view-title no-select">{title}</h1>}
         {children}
-        <div class="spacer"></div>
       </div>
     </>
   );
