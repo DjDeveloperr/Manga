@@ -11,9 +11,14 @@ function NavigationItem(
   return (
     <Link
       href={href}
-      extendClass={`navigation-item ${active === title ? "active" : ""}`}
+      extendClass={`no-select navigation-item ${
+        active === title ? "active" : ""
+      }`}
     >
-      <span class="navigation-icon material-symbols-outlined" title={title}>
+      <span
+        class="no-select navigation-icon material-symbols-outlined"
+        title={title}
+      >
         {icon}
       </span>
     </Link>
