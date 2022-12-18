@@ -2,7 +2,7 @@
     --navigation-height: 50px;
     --navigation-width-desktop: 60px;
     --backdrop-color: rgba(44, 44, 44, 0.44);
-    --backdrop-blur: 8px;
+    --backdrop-blur: 14px;
     color-scheme: dark;
 }
 
@@ -20,9 +20,11 @@ body {
 }
 
 .app {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
+    margin: 0;
+    padding: 0;
     width: 100%;
     height: 100%;
 }
@@ -31,6 +33,8 @@ body {
     position: fixed;
     bottom: 0;
     left: 0;
+    margin: 0;
+    padding: 0;
     width: 100%;
     --border-w: 1px;
     height: calc(var(--navigation-height) - var(--border-w));
@@ -53,7 +57,7 @@ body {
     transition: background-color 0.2s;
 }
 
-.navigation-item:hover > .navigation-icon {
+.navigation-item:hover>.navigation-icon {
     color: white
 }
 
@@ -65,8 +69,9 @@ body {
     font-weight: lighter;
 }
 
-.navigation-item, .active > .navigation-icon {
-    color: white;
+.navigation-item,
+.active>.navigation-icon {
+    color: #3B81F6;
 }
 
 .navigation-spacer {
@@ -104,7 +109,7 @@ body {
     margin: 10px;
 }
 
-.page-buttons > * {
+.page-buttons>* {
     margin: 6px;
     background-color: rgba(30, 30, 30, 0.5);
     border-radius: 5px;
@@ -140,7 +145,9 @@ body {
     position: absolute;
 }
 
-.manga-card:hover, .manga-card:active, .manga-card:focus {
+.manga-card:hover,
+.manga-card:active,
+.manga-card:focus {
     transform: scale(1.088);
     z-index: 5;
 }
@@ -296,8 +303,8 @@ body {
     }
 
     .main-view {
-        margin-top: var(--notch);
-        margin-bottom: calc(var(--navigation-height) + var(--nav-pad));
+        padding-top: var(--notch);
+        padding-bottom: calc(var(--navigation-height) + var(--nav-pad));
     }
 
     .navigation {
@@ -319,7 +326,7 @@ body {
     margin: 20px;
 }
 
-.browse-input > * {
+.browse-input>* {
     margin: 10px;
     font-size: 18px;
     padding: 3px;
@@ -329,11 +336,11 @@ body {
     width: 7px;
     height: 7px;
 }
-  
+
 ::-webkit-scrollbar-track {
     background: black;
 }
-  
+
 ::-webkit-scrollbar-thumb {
     border-radius: 14px;
     background: #888;

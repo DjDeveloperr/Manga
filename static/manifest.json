@@ -5,7 +5,7 @@
   "background_color": "#ffffff",
   "display": "standalone",
   "scope": "/",
-  "start_url": "/?fullscreen=1",
+  "start_url": "/?standalone=1",
   "description": "Simple and intuitive manga reader.",
   "orientation": "portrait",
   "icons": [
