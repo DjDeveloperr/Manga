@@ -65,6 +65,8 @@ body {
     text-decoration: none;
     transition: color 0.2s;
     font-weight: lighter;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 .navigation-item,
@@ -75,6 +77,11 @@ body {
 .navigation-spacer {
     margin: 0;
     padding: 0;
+}
+
+.no-select {
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 .main-view {
@@ -117,6 +124,8 @@ body {
     padding-top: 3px;
     padding-bottom: 3px;
     cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 .hscroll {
@@ -179,6 +188,8 @@ body {
     padding: 5px;
     border-radius: 5px;
     background-color: rgba(30, 30, 30, 0.5);
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 .manga-header {
