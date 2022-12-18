@@ -55,6 +55,12 @@ body {
     transition: color 0.2s;
     -webkit-user-select: none;
     user-select: none;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.navigation-item:active {
+    color: #3B81F6;
+    background-color: rgba(0, 0, 0, 0);
 }
 
 .navigation-item:hover>.navigation-icon {
@@ -79,7 +85,7 @@ body {
 .navigation-spacer {
     display: block;
     width: 100%;
-    height: calc(26px + var(--navigation-height));
+    height: calc(30px + var(--navigation-height));
 }
 
 .no-select {
@@ -87,14 +93,6 @@ body {
     user-select: none;
     -webkit-touch-callout: none;
     -webkit-user-drag: none;
-}
-
-a,
-a:visited,
-a:hover,
-a:active {
-    color: inherit;
-    background-color: inherit;
 }
 
 .main-view {
