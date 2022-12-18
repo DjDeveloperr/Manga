@@ -77,8 +77,9 @@ body {
 }
 
 .navigation-spacer {
-    margin: 0;
-    padding: 0;
+    display: block;
+    width: 100%;
+    height: calc(20px + var(--navigation-height));
 }
 
 .no-select {
@@ -279,10 +280,6 @@ body {
     .main-view {
         margin-left: var(--navigation-height);
     }
-
-    .navigation-spacer {
-        height: 0;
-    }
 }
 
 .notch {
@@ -298,6 +295,7 @@ body {
 @media (display-mode: standalone) and (max-width: 600px) {
     :root {
         --notch: 50px;
+        --nav-pad: 16px;
     }
 
     .notch {
@@ -320,14 +318,11 @@ body {
 
     .navigation {
         width: 100%;
-        --nav-pad: 16px;
         height: calc(var(--navigation-height) + var(--nav-pad));
         padding-bottom: var(--nav-pad);
     }
 
     .navigation-spacer {
-        display: block;
-        width: 100%;
         height: calc(var(--navigation-height) + var(--nav-pad));
     }
 }

@@ -39,7 +39,7 @@ export default function App(
       <div class="app">
         {children}
       </div>
-      <div class="nav-space"></div>
+      <div class="navigation-spacer"></div>
     </>
   );
 }
