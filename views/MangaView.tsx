@@ -23,6 +23,14 @@ export function MangaView(
             <p class="manga-info-field">Genres: {manga.genres.join(", ")}</p>
             <p class="manga-info-field">Rating: {manga.rating}</p>
             <p class="manga-info-field">Views: {manga.views}</p>
+            <Link
+              extendClass="manga-read-btn"
+              href={`/manga/${manga.id}/${
+                manga.chapters[manga.chapters.length - 1].id
+              }`}
+            >
+              Read
+            </Link>
           </div>
         </div>
         <MainViewBlock title="Description" id="description">

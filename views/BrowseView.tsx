@@ -2,6 +2,7 @@ import App from "../components/App.tsx";
 import { Link } from "../components/Link.tsx";
 import { MainView } from "../components/MainView.tsx";
 import { MangaCardGrid } from "../components/MangaCardGrid.tsx";
+import { MaterialIcon } from "../components/MaterialIcon.tsx";
 import type { ExtendedData } from "../routes/browse.tsx";
 
 export function BrowseView({ data }: { data: ExtendedData }) {
@@ -40,7 +41,15 @@ export function BrowseView({ data }: { data: ExtendedData }) {
               <div class="page-results">{data.total} results</div>
               <div class="page-buttons">
                 {data.page !== 1
-                  ? <Link href={pathWithParam("page", "1")}>First</Link>
+                  ? (
+                    <Link href={pathWithParam("page", "1")}>
+                      <MaterialIcon
+                        extendClass="page-btn-icon"
+                        icon="keyboard_double_arrow_left"
+                      />{" "}
+                      First
+                    </Link>
+                  )
                   : null}
                 {data.page > 1
                   ? (
@@ -50,6 +59,10 @@ export function BrowseView({ data }: { data: ExtendedData }) {
                         pagecap(data.page - 1).toString(),
                       )}
                     >
+                      <MaterialIcon
+                        extendClass="page-btn-icon-small"
+                        icon="arrow_back_ios"
+                      />{" "}
                       Prev
                     </Link>
                   )
@@ -63,6 +76,10 @@ export function BrowseView({ data }: { data: ExtendedData }) {
                       )}
                     >
                       Next
+                      <MaterialIcon
+                        extendClass="page-btn-icon-small"
+                        icon="arrow_forward_ios"
+                      />
                     </Link>
                   )
                   : null}
@@ -70,6 +87,10 @@ export function BrowseView({ data }: { data: ExtendedData }) {
                   ? (
                     <Link href={pathWithParam("page", data.pages.toString())}>
                       Last ({data.pages})
+                      <MaterialIcon
+                        extendClass="page-btn-icon"
+                        icon="keyboard_double_arrow_right"
+                      />
                     </Link>
                   )
                   : null}

@@ -1,4 +1,5 @@
 import { Link } from "./Link.tsx";
+import { MaterialIcon } from "./MaterialIcon.tsx";
 
 function NavigationItem(
   { title, icon, href, active }: {
@@ -15,12 +16,11 @@ function NavigationItem(
         active === title ? "active" : ""
       }`}
     >
-      <span
-        class="no-select navigation-icon material-symbols-outlined"
+      <MaterialIcon
+        icon={icon}
         title={title}
-      >
-        {icon}
-      </span>
+        extendClass="no-select navigation-icon"
+      />
     </Link>
   );
 }
