@@ -16,6 +16,7 @@ export function MangaCard({ manga }: {
           class="manga-card-thumbnail"
           src={manga.thumbnail}
           alt={manga.name}
+          loading="lazy"
         />
         <div class="manga-card-info">
           <span class="manga-card-name">{manga.name}</span>

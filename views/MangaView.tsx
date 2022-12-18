@@ -9,8 +9,36 @@ export function MangaView(
 ) {
   return (
     <App>
-      <MainView title={manga.title}>
-        <div class="manga-header">
+      <div class="manga-header-mobile">
+        <div
+          class="manga-header-mobile-image"
+          style={`background-image: url("${manga.thumbnail}");`}
+        >
+        </div>
+        <div class="manga-header-mobile-content">
+          <div class="manga-header-mobile-content-bg"></div>
+          <h2 class="mhm-field">{manga.title}</h2>
+          <h3 class="mhm-field">By {manga.authors}</h3>
+          <Link
+            extendClass="manga-read-btn-mobile mhm-field"
+            href={`/manga/${manga.id}/${
+              manga.chapters[manga.chapters.length - 1].id
+            }`}
+          >
+            Read
+          </Link>
+          <img
+            class="manga-header-mobile-thumbnail mhm-field"
+            alt={manga.title}
+            src={manga.thumbnail}
+          />
+        </div>
+      </div>
+      <MainView title={manga.title} hiddenTitle>
+        <div class="manga-header-desktop">
+          <h1>{manga.title}</h1>
+        </div>
+        <div class="manga-header-desktop">
           <img
             class="manga-thumbnail"
             alt={manga.title}
