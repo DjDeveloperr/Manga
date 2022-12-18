@@ -255,12 +255,12 @@ body {
 
 .manga-header-mobile-content {
     position: absolute;
-    bottom: -14px;
+    bottom: -18px;
     height: auto;
     left: 0;
     width: 100%;
-    padding-top: 40px;
-    padding-bottom: calc(34px + var(--navigation-height));
+    padding-top: 80px;
+    padding-bottom: calc(38px + var(--navigation-height));
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -268,10 +268,16 @@ body {
     color: white;
     background: none;
     z-index: 4;
+    text-align: center;
 }
 
 .mhm-field {
     z-index: 5;
+}
+
+.read-more {
+    transform: rotate(90deg);
+    color: white;
 }
 
 .manga-header-mobile-thumbnail {
@@ -280,7 +286,7 @@ body {
     position: absolute;
     width: var(--width);
     height: var(--height);
-    top: calc(30px - var(--height));
+    top: calc(70px - var(--height));
     left: calc(50% - calc(var(--width) / 2));
     border-radius: 6px;
 }

@@ -2,6 +2,7 @@ import App from "../components/App.tsx";
 import { Link } from "../components/Link.tsx";
 import { MainView } from "../components/MainView.tsx";
 import { MainViewBlock } from "../components/MainViewBlock.tsx";
+import { MaterialIcon } from "../components/MaterialIcon.tsx";
 import { Manga as ApiManga } from "../src/types.ts";
 
 export function MangaView(
@@ -18,7 +19,12 @@ export function MangaView(
         <div class="manga-header-mobile-content">
           <div class="manga-header-mobile-content-bg"></div>
           <h2 class="mhm-field">{manga.title}</h2>
-          <h3 class="mhm-field">By {manga.authors}</h3>
+          <h3 class="mhm-field" style="font-weight: lighter">
+            By {manga.authors}
+          </h3>
+          <p class="mhm-field" style="padding: 10px">
+            {manga.genres.join(", ")}
+          </p>
           <Link
             extendClass="manga-read-btn-mobile mhm-field"
             href={`/manga/${manga.id}/${
@@ -27,6 +33,10 @@ export function MangaView(
           >
             Read
           </Link>
+          <MaterialIcon
+            icon="arrow_forward_ios"
+            extendClass="read-more mhm-field no-select"
+          />
           <img
             class="manga-header-mobile-thumbnail mhm-field"
             alt={manga.title}
