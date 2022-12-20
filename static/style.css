@@ -1,7 +1,7 @@
 :root {
     color-scheme: dark;
     --notch: 50px;
-    --nav-pad-sub: -14px;
+    --nav-pad-sub: -50px;
     --nav-pad-ir: var(--nav-pad-sub);
     --nav-pad-ir: env(safe-area-inset-bottom);
     --nav-pad: calc(var(--nav-pad-ir) - var(--nav-pad-sub));
