@@ -71,6 +71,22 @@ export function MangaView(
             </Link>
           </div>
         </div>
+        <div class="manga-fields-mobile">
+          <div class="manga-field">
+            <div class="manga-field-title">Status</div>
+            <div class="manga-field-value">{manga.status}</div>
+          </div>
+          <div class="manga-field">
+            <div class="manga-field-title">Rating</div>
+            <div class="manga-field-value">
+              {manga.rating.split("-")[0].trim()}
+            </div>
+          </div>
+          <div class="manga-field">
+            <div class="manga-field-title">Views</div>
+            <div class="manga-field-value">{manga.views}</div>
+          </div>
+        </div>
         <MainViewBlock title="Description" id="description">
           <p class="manga-description">{manga.description}</p>
         </MainViewBlock>
