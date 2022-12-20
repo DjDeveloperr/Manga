@@ -1,9 +1,11 @@
 import App from "../components/App.tsx";
 import { Link } from "../components/Link.tsx";
 import { MainView } from "../components/MainView.tsx";
+import { MainViewBlock } from "../components/MainViewBlock.tsx";
 import { MangaCardGrid } from "../components/MangaCardGrid.tsx";
 import { MaterialIcon } from "../components/MaterialIcon.tsx";
 import type { ExtendedData } from "../routes/browse.tsx";
+import { ADULT_GENRES, Genre } from "../src/advanced_search.ts";
 
 export function BrowseView({ data }: { data: ExtendedData }) {
   const pathWithParam = (param: string, value: string) => {
@@ -28,6 +30,17 @@ export function BrowseView({ data }: { data: ExtendedData }) {
           />
           <input class="browse-submit-btn" type="submit" value="Search" />
         </form>
+        <MainViewBlock id="genres" title="Genres">
+          {Object.keys(Genre).filter((e) =>
+            typeof Genre[e as keyof typeof Genre] === "number"
+          ).filter((e) => !ADULT_GENRES.includes(e as keyof typeof Genre)).map(
+            (genre) => (
+              <Link href={`/browse?included=${genre}`}>
+                <div class="genre">{genre}</div>
+              </Link>
+            ),
+          )}
+        </MainViewBlock>
         <MangaCardGrid
           mangas={data.results.map((e) => ({
             id: e.id,

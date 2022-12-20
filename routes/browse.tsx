@@ -1,6 +1,7 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { BrowseView } from "../views/BrowseView.tsx";
 import {
+  ADULT_GENRES,
   advancedSearch,
   AdvancedSearchData,
   AdvancedSearchOptions,
@@ -41,6 +42,13 @@ export const handler: Handlers<ExtendedData> = {
         Genre[e as keyof typeof Genre]
       ).filter((e) => e !== undefined) as Genre[],
     };
+    options.excluded = [
+      ...ADULT_GENRES.map((e) => Genre[e]),
+      ...options.excluded!,
+    ];
+    options.included = options.included!.filter((e) =>
+      !options.excluded!.includes(e)
+    );
     const resp = await advancedSearch(options);
     return ctx.render({ url, ...resp });
   },

@@ -47,6 +47,18 @@ export enum Genre {
   Yuri = 42,
 }
 
+export const ADULT_GENRES: readonly (keyof typeof Genre)[] = [
+  "Adult",
+  "Ecchi",
+  "Erotica",
+  "GenderBender",
+  "Harem",
+  "Mature",
+  "Yaoi",
+  "Yuri",
+  "Pornographic",
+] as const;
+
 export enum OrderBy {
   LatestUpdates,
   TopView,

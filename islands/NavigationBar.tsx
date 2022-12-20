@@ -10,7 +10,6 @@ function NavigationItem(
 ) {
   return (
     <div
-      onClick={() => location.href = href}
       class={`no-select navigation-item ${active === title ? "active" : ""}`}
     >
       <MaterialIcon
@@ -18,6 +17,8 @@ function NavigationItem(
         title={title}
         extendClass="no-select navigation-icon"
       />
+      <div class="navigation-item-cover" onClick={() => location.href = href}>
+      </div>
     </div>
   );
 }

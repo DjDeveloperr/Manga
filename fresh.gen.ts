@@ -14,7 +14,8 @@ import * as $7 from "./routes/library.tsx";
 import * as $8 from "./routes/manga/[id].tsx";
 import * as $9 from "./routes/manga/[id]/[chapter].tsx";
 import * as $10 from "./routes/settings.tsx";
-import * as $$0 from "./islands/NavigationBar.tsx";
+import * as $$0 from "./islands/ChapterItem.tsx";
+import * as $$1 from "./islands/NavigationBar.tsx";
 
 const manifest = {
   routes: {
@@ -31,7 +32,8 @@ const manifest = {
     "./routes/settings.tsx": $10,
   },
   islands: {
-    "./islands/NavigationBar.tsx": $$0,
+    "./islands/ChapterItem.tsx": $$0,
+    "./islands/NavigationBar.tsx": $$1,
   },
   baseUrl: import.meta.url,
   config,

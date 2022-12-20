@@ -1,7 +1,7 @@
 :root {
     color-scheme: dark;
     --notch: 50px;
-    --nav-pad-sub: -16px;
+    --nav-pad-sub: -17px;
     --nav-pad-ir: calc(0px - var(--nav-pad-sub));
     --nav-pad-ir: env(safe-area-inset-bottom);
     --nav-pad: calc(var(--nav-pad-ir) + var(--nav-pad-sub));
@@ -53,6 +53,7 @@ body {
 }
 
 .navigation-item {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -62,20 +63,12 @@ body {
     -webkit-user-select: none;
     user-select: none;
     background-color: rgba(0, 0, 0, 0);
-}
-
-.navigation-item:active {
-    color: #3B81F6;
-    background-color: rgba(0, 0, 0, 0);
-}
-
-.navigation-item:hover>.navigation-icon {
-    color: white;
+    color: rgba(255, 255, 255, 0.7);
 }
 
 .navigation-icon {
     font-size: 34px;
-    color: rgba(255, 255, 255, 0.7);
+    color: inherit;
     text-decoration: none;
     transition: color 0.2s;
     font-weight: 200;
@@ -83,9 +76,22 @@ body {
     user-select: none;
 }
 
-.navigation-item,
-.active>.navigation-icon {
+.navigation-item.active {
     color: #3B81F6;
+}
+
+.navigation-item-cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.navigation-item:hover {
+    color: white;
+    cursor: pointer;
 }
 
 .navigation-spacer {
@@ -530,6 +536,7 @@ body {
     align-items: center;
     justify-content: space-around;
     margin: 20px;
+    padding-bottom: 10px;
 }
 
 .chapter-nav-btn {
@@ -545,4 +552,66 @@ body {
 
 .page-btn-icon-small {
     font-size: 20px;
+}
+
+.chapters {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.chapter {
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+    background-color: rgba(30, 30, 30, 0.5);
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.chapter-info {
+    display: flex;
+    flex-direction: row;
+    font-size: 16px;
+}
+
+.chapter-info>* {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin: 5px;
+}
+
+.chapter-icon {
+    font-size: 16px;
+    padding-right: 3px;
+}
+
+@media only screen and (min-width: 980px) {
+    .chapters {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-gap: 10px;
+    }
+}
+
+@media only screen and (min-width: 760px) and (max-width: 980px) {
+    .chapters {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: 10px;
+    }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 760px) {
+    .chapters {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 10px;
+    }
+}
+
+.chapter-view {
+    margin: 0 !important;
+    padding: 0 !important;
 }

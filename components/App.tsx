@@ -3,7 +3,11 @@ import { AppleSplashScreen } from "./AppleSplashScreen.tsx";
 import NavigationBar from "../islands/NavigationBar.tsx";
 
 export default function App(
-  { children, active }: { children: any; active?: string },
+  { children, active, noSpacer }: {
+    children: any;
+    active?: string;
+    noSpacer?: boolean;
+  },
 ) {
   return (
     <>
@@ -34,11 +38,11 @@ export default function App(
         />
         <AppleSplashScreen />
       </Head>
-      <div class="notch"></div>
+      {noSpacer ? null : <div class="notch"></div>}
       <NavigationBar active={active} />
       <div class="app">
         {children}
-        <div class="navigation-spacer"></div>
+        {noSpacer ? null : <div class="navigation-spacer"></div>}
       </div>
     </>
   );

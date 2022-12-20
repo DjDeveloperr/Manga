@@ -15,9 +15,11 @@ export function ChapterView(
   const prevChapter = manga.chapters[chIndex + 1];
   const nextChapter = manga.chapters[chIndex - 1];
   return (
-    <App>
+    <App noSpacer>
       <MainView
         title={manga.chapters[chIndex].title}
+        hiddenTitle
+        extendClass="chapter-view"
       >
         {chapter.map((page) => (
           <img
@@ -50,6 +52,7 @@ export function ChapterView(
             : null}
         </div>
       </MainView>
+      <script src="/chapter-nav.js"></script>
     </App>
   );
 }
