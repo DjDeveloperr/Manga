@@ -9,6 +9,6 @@ addEventListener("scroll", () => {
 });
 
 addEventListener("click", (e) => {
-  if (!e.target?.classList?.contains("page")) return;
+  if (!e.target?.classList?.contains("page") || e.tagName !== "IMG") return;
   nav.style.display = nav.style.display === "none" ? "flex" : "none";
 });
