@@ -15,8 +15,9 @@ export function SettingsView() {
             GitHub
           </Link>.
         </MainViewBlock>
-        <MainViewBlock id="under-construction" title="Note">
-          This page is under construction.
+        <MainViewBlock id="deployment-info" title="Deployment Info">
+          <p>Region: {Deno.env.get("DENO_REGION")}</p>
+          <p>Deployment ID: {Deno.env.get("DENO_DEPLOYMENT_ID")}</p>
         </MainViewBlock>
       </MainView>
     </App>
