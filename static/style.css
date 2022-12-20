@@ -1,7 +1,8 @@
 :root {
     color-scheme: dark;
     --notch: 50px;
-    --nav-pad: 16px;
+    --nav-pad: 0px;
+    --nav-pad: env(safe-area-inset-bottom);
     --navigation-height: 50px;
     --navigation-width-desktop: 60px;
     --backdrop-color: rgba(41, 41, 41, 0.44);
@@ -421,7 +422,8 @@ body {
         top: 0;
         left: 0;
         width: 100%;
-        height: var(--notch);
+        height: 0px;
+        height: env(safe-area-inset-top);
         background-color: var(--backdrop-color);
         backdrop-filter: var(--backdrop-blur);
         -webkit-backdrop-filter: blur(var(--backdrop-blur));
