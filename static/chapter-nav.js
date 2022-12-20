@@ -8,6 +8,7 @@ addEventListener("scroll", () => {
   nav.style.display = "none";
 });
 
-addEventListener("click", () => {
+addEventListener("click", (e) => {
+  if (!e.target?.classList?.contains("page")) return;
   nav.style.display = nav.style.display === "none" ? "flex" : "none";
 });
