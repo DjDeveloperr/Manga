@@ -70,7 +70,7 @@ body {
 }
 
 .navigation-item:hover>.navigation-icon {
-    color: #3B81F6;
+    color: white;
 }
 
 .navigation-icon {
@@ -91,7 +91,7 @@ body {
 .navigation-spacer {
     display: block;
     width: 100%;
-    height: calc(30px + var(--navigation-height));
+    height: calc(10px + var(--navigation-height));
 }
 
 .no-select {

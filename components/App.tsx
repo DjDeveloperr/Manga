@@ -1,6 +1,6 @@
 import { Head } from "$fresh/runtime.ts";
 import { AppleSplashScreen } from "./AppleSplashScreen.tsx";
-import { Navigation } from "./Navigation.tsx";
+import NavigationBar from "../islands/NavigationBar.tsx";
 
 export default function App(
   { children, active }: { children: any; active?: string },
@@ -35,11 +35,11 @@ export default function App(
         <AppleSplashScreen />
       </Head>
       <div class="notch"></div>
-      <Navigation active={active} />
+      <NavigationBar active={active} />
       <div class="app">
         {children}
+        <div class="navigation-spacer"></div>
       </div>
-      <div class="navigation-spacer"></div>
     </>
   );
 }

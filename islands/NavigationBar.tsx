@@ -1,5 +1,4 @@
-import { Link } from "./Link.tsx";
-import { MaterialIcon } from "./MaterialIcon.tsx";
+import { MaterialIcon } from "../components/MaterialIcon.tsx";
 
 function NavigationItem(
   { title, icon, href, active }: {
@@ -10,22 +9,20 @@ function NavigationItem(
   },
 ) {
   return (
-    <Link
-      href={href}
-      extendClass={`no-select navigation-item ${
-        active === title ? "active" : ""
-      }`}
+    <div
+      onClick={() => location.href = href}
+      class={`no-select navigation-item ${active === title ? "active" : ""}`}
     >
       <MaterialIcon
         icon={icon}
         title={title}
         extendClass="no-select navigation-icon"
       />
-    </Link>
+    </div>
   );
 }
 
-export function Navigation({ active }: { active?: string }) {
+export default function NavigationBar({ active }: { active?: string }) {
   return (
     <div class="navigation">
       <NavigationItem

@@ -1,6 +1,6 @@
 {
   "tasks": {
-    "start": "deno run -A --watch=static/,routes/,views/ dev.ts"
+    "start": "deno run -A --watch=static/,routes/,views/,islands/ dev.ts"
   },
   "compilerOptions": {
     "jsx": "react-jsx",
