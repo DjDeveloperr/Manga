@@ -42,7 +42,7 @@ export default function App(
       <NavigationBar active={active} />
       <div class="app">
         {children}
-        {noSpacer ? null : <div class="navigation-spacer"></div>}
+        <div class="navigation-spacer"></div>
       </div>
     </>
   );
