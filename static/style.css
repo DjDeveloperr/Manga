@@ -537,6 +537,7 @@ body {
     justify-content: space-around;
     margin: 20px;
     padding-bottom: 20px;
+    z-index: 100;
 }
 
 .chapter-nav-btn {
