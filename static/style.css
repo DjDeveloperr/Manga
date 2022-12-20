@@ -26,6 +26,7 @@ body {
 
 .app {
     position: absolute;
+    display: block;
     top: 0;
     left: 0;
     width: 100%;
@@ -34,7 +35,7 @@ body {
 
 .navigation {
     position: fixed;
-    top: calc(100vh - var(--navigation-height));
+    bottom: 0;
     left: 0;
     width: 100%;
     --border-w: 1px;
@@ -105,6 +106,7 @@ body {
     margin-top: 10px;
     margin-bottom: var(--navigation-height);
     padding: 20px;
+    min-height: calc(100vh - var(--navigation-height) - 10px);
 }
 
 .main-view-block {
