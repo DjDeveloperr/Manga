@@ -1,9 +1,10 @@
 :root {
     color-scheme: dark;
     --notch: 50px;
-    --nav-pad-ir: -10px;
-    --nav-pad-ir: calc(env(safe-area-inset-bottom) - 10px);
-    --nav-pad: calc(10px + var(--nav-pad-ir));
+    --nav-pad-sub: -16px;
+    --nav-pad-ir: var(--nav-pad-sub);
+    --nav-pad-ir: calc(env(safe-area-inset-bottom) + var(--nav-pad-sub));
+    --nav-pad: calc(var(--nav-pad-ir) - var(--nav-pad-sub));
     --navigation-height: 50px;
     --navigation-width-desktop: 60px;
     --backdrop-color: rgba(41, 41, 41, 0.44);
@@ -403,7 +404,7 @@ body {
         height: var(--manga-field-height);
         border-top: solid 1px rgba(255, 255, 255, 0.1);
         border-bottom: solid 1px rgba(255, 255, 255, 0.1);
-        margin-top: 16px;
+        margin-top: 8px;
     }
 
     .manga-fields-mobile>.manga-field {
