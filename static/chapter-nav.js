@@ -8,6 +8,7 @@ addEventListener("scroll", () => {
   nav.style.display = "none";
 });
 
-addEventListener("dblclick", () => {
+addEventListener("dblclick", (e) => {
+  if (!e.target?.classList?.contains("page") || e.tagName !== "IMG") return;
   nav.style.display = nav.style.display === "none" ? "flex" : "none";
 });
