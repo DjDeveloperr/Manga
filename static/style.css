@@ -1,8 +1,9 @@
 :root {
     color-scheme: dark;
     --notch: 50px;
-    --nav-pad: 0px;
-    --nav-pad: env(safe-area-inset-bottom);
+    --nav-pad-ir: -10px;
+    --nav-pad-ir: calc(env(safe-area-inset-bottom) - 10px);
+    --nav-pad: calc(10px + var(--nav-pad-ir));
     --navigation-height: 50px;
     --navigation-width-desktop: 60px;
     --backdrop-color: rgba(41, 41, 41, 0.44);
