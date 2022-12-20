@@ -34,7 +34,7 @@ body {
 
 .navigation {
     position: fixed;
-    bottom: 0;
+    top: calc(100vh - var(--navigation-height));
     left: 0;
     width: 100%;
     --border-w: 1px;
